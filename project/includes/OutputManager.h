@@ -41,6 +41,12 @@ class BoxManager{
     void draw_footer(){
       hf_mutual('|');
     }
+    void draw_row(){
+      repeat_chr(' ', initial_spaces);
+      cout << '|';
+      repeat_chr(' ', box_width);
+      cout << '|' << "\n";
+    }
     void draw_row(string text){
       bool over = false;
 
@@ -80,23 +86,22 @@ class OutputManager{
       cout << "\n\n\n";
 
       bm.draw_header();
-      // bm.draw_row("abc");
-      // bm.draw_row("classification means to seperate sort out same and different thigs or objects on the basis of structure and their functional units");
+      bm.draw_row("ABc");
       
-      cout << "   |"; repeat_chr(' ', 93); cout << "|\n";
-      cout << "   |    \t    __        __   _                               _"; repeat_chr(' ', 29); cout << "|\n";
-      cout << "   |    \t    \\ \\      / /__| | ___ ___  _ __ ___   ___     | |_ ___  "; repeat_chr(' ', 21); cout << "|\n";
-      cout << "   |    \t     \\ \\ /\\ / / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\    | __/ _ \\ "; repeat_chr(' ', 21); cout << "|\n";
-      cout << "   |    \t      \\ V  V /  __/ | (_| (_) | | | | | |  __/    | || (_) |"; repeat_chr(' ', 21); cout << "|\n";
-      cout << "   |    \t       \\_/\\_/ \\___|_|\\___\\___/|_| |_| |_|\\___|     \\__\\___/ "; repeat_chr(' ', 21); cout << "|\n";
-      cout << "   |"; repeat_chr(' ', 93); cout << "|\n";
-      cout << "   |     ____  _     _        _ _           _           _      _____                    "; repeat_chr(' ', 9); cout << "|\n";
-      cout << "   |    |  _ \\(_)___| |_ _ __(_) |__  _   _| |_ ___  __| |    |  ___|__  _ __ _ __ ___  "; repeat_chr(' ', 9); cout << "|\n";
-      cout << "   |    | | | | / __| __| '__| | '_ \\| | | | __/ _ \\/ _` |    | |_ / _ \\| '__| '_ ` _ \\ "; repeat_chr(' ', 9); cout << "|\n";
-      cout << "   |    | |_| | \\__ \\ |_| |  | | |_) | |_| | ||  __/ (_| |    |  _| (_) | |  | | | | | |"; repeat_chr(' ', 9); cout << "|\n";
-      cout << "   |    |____/|_|___/\\__|_|  |_|_.__/ \\__,_|\\__\\___|\\__,_|    |_|  \\___/|_|  |_| |_| |_|"; repeat_chr(' ', 9); cout << "|\n";
-      cout << "   |"; repeat_chr(' ', 93); cout << "|\n";
-      // cout << "   |"; repeat_chr('_', 93); cout << "|\n";
+      // cout << "   |"; repeat_chr(' ', 93); cout << "|\n";
+      // cout << "   |    \t    __        __   _                               _"; repeat_chr(' ', 29); cout << "|\n";
+      // cout << "   |    \t    \\ \\      / /__| | ___ ___  _ __ ___   ___     | |_ ___  "; repeat_chr(' ', 21); cout << "|\n";
+      // cout << "   |    \t     \\ \\ /\\ / / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\    | __/ _ \\ "; repeat_chr(' ', 21); cout << "|\n";
+      // cout << "   |    \t      \\ V  V /  __/ | (_| (_) | | | | | |  __/    | || (_) |"; repeat_chr(' ', 21); cout << "|\n";
+      // cout << "   |    \t       \\_/\\_/ \\___|_|\\___\\___/|_| |_| |_|\\___|     \\__\\___/ "; repeat_chr(' ', 21); cout << "|\n";
+      // cout << "   |"; repeat_chr(' ', 93); cout << "|\n";
+      // cout << "   |     ____  _     _        _ _           _           _      _____                    "; repeat_chr(' ', 9); cout << "|\n";
+      // cout << "   |    |  _ \\(_)___| |_ _ __(_) |__  _   _| |_ ___  __| |    |  ___|__  _ __ _ __ ___  "; repeat_chr(' ', 9); cout << "|\n";
+      // cout << "   |    | | | | / __| __| '__| | '_ \\| | | | __/ _ \\/ _` |    | |_ / _ \\| '__| '_ ` _ \\ "; repeat_chr(' ', 9); cout << "|\n";
+      // cout << "   |    | |_| | \\__ \\ |_| |  | | |_) | |_| | ||  __/ (_| |    |  _| (_) | |  | | | | | |"; repeat_chr(' ', 9); cout << "|\n";
+      // cout << "   |    |____/|_|___/\\__|_|  |_|_.__/ \\__,_|\\__\\___|\\__,_|    |_|  \\___/|_|  |_| |_| |_|"; repeat_chr(' ', 9); cout << "|\n";
+      // cout << "   |"; repeat_chr(' ', 93); cout << "|\n";
+      // // cout << "   |"; repeat_chr('_', 93); cout << "|\n";
       bm.draw_footer();
       cout << "\n\n\n";
 
@@ -107,5 +112,21 @@ class OutputManager{
 
 
 /*
+
+
+cout << "   |"; repeat_chr(' ', 93); cout << "|\n";
+cout << "   |    \t    __        __   _                               _"; repeat_chr(' ', 29); cout << "|\n";
+cout << "   |    \t    \\ \\      / /__| | ___ ___  _ __ ___   ___     | |_ ___  "; repeat_chr(' ', 21); cout << "|\n";
+cout << "   |    \t     \\ \\ /\\ / / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\    | __/ _ \\ "; repeat_chr(' ', 21); cout << "|\n";
+cout << "   |    \t      \\ V  V /  __/ | (_| (_) | | | | | |  __/    | || (_) |"; repeat_chr(' ', 21); cout << "|\n";
+cout << "   |    \t       \\_/\\_/ \\___|_|\\___\\___/|_| |_| |_|\\___|     \\__\\___/ "; repeat_chr(' ', 21); cout << "|\n";
+cout << "   |"; repeat_chr(' ', 93); cout << "|\n";
+cout << "   |     ____  _     _        _ _           _           _      _____                    "; repeat_chr(' ', 9); cout << "|\n";
+cout << "   |    |  _ \\(_)___| |_ _ __(_) |__  _   _| |_ ___  __| |    |  ___|__  _ __ _ __ ___  "; repeat_chr(' ', 9); cout << "|\n";
+cout << "   |    | | | | / __| __| '__| | '_ \\| | | | __/ _ \\/ _` |    | |_ / _ \\| '__| '_ ` _ \\ "; repeat_chr(' ', 9); cout << "|\n";
+cout << "   |    | |_| | \\__ \\ |_| |  | | |_) | |_| | ||  __/ (_| |    |  _| (_) | |  | | | | | |"; repeat_chr(' ', 9); cout << "|\n";
+cout << "   |    |____/|_|___/\\__|_|  |_|_.__/ \\__,_|\\__\\___|\\__,_|    |_|  \\___/|_|  |_| |_| |_|"; repeat_chr(' ', 9); cout << "|\n";
+cout << "   |"; repeat_chr(' ', 93); cout << "|\n";
+// cout << "   |"; repeat_chr('_', 93); cout << "|\n";
 
 */

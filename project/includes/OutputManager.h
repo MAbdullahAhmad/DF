@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// Helpers
 class BoxManager{
   private:
     int
@@ -34,26 +35,31 @@ class BoxManager{
       inner_padding = ip;
     }
 
-    // Draw Methods
+    // Start Box
     void draw_header(){
       hf_mutual(',');
     }
+    // End Box
     void draw_footer(){
       hf_mutual('|');
     }
+    // Empty Row
     void draw_row(){
       repeat_chr(' ', initial_spaces);
       cout << '|';
       repeat_chr(' ', box_width);
       cout << '|' << "\n";
     }
+    // Row With Content
     void draw_row(string text){
-      bool over = false;
+      bool over = false; // flag for overflow
 
+      // Start
       repeat_chr(' ', initial_spaces);
       cout << '|';
       repeat_chr(' ', inner_padding);
 
+      // Content with Overflow Handeling
       if(text.length() > box_width-3-inner_padding){
         cout << text.substr(0, box_width-3-inner_padding) << "   ";
         over = true;
@@ -61,6 +67,7 @@ class BoxManager{
         cout << text;
       }
 
+      // End
       repeat_chr(' ', box_width - text.length()-3);
       cout << '|' << "\n";
       if(over){
@@ -69,6 +76,7 @@ class BoxManager{
     }
 };
 
+// Output Manager : Main Class
 class OutputManager{
   private:
     Menu m;
@@ -92,6 +100,7 @@ class OutputManager{
       bm.draw_row("                 \\ \\ /\\ / / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\    | __/ _ \\ ");
       bm.draw_row("                  \\ V  V /  __/ | (_| (_) | | | | | |  __/    | || (_) |");
       bm.draw_row("                   \\_/\\_/ \\___|_|\\___\\___/|_| |_| |_|\\___|     \\__\\___/ ");
+      bm.draw_row();
       bm.draw_row("     ____  _     _        _ _           _           _      _____                    ");
       bm.draw_row("    |  _ \\(_)___| |_ _ __(_) |__  _   _| |_ ___  __| |    |  ___|__  _ __ _ __ ___  ");
       bm.draw_row("    | | | | / __| __| '__| | '_ \\| | | | __/ _ \\/ _` |    | |_ / _ \\| '__| '_ ` _ \\ ");
@@ -101,8 +110,8 @@ class OutputManager{
       bm.draw_footer();
 
       cout << "\n\n\n";
-
     }
 };
+
 
 #endif

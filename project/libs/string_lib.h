@@ -15,4 +15,19 @@ void repeat_chr(char c, int count){
   }
 }
 
+string get_repeat_str(string s, int count){
+  string tmp;
+  for(int i=0; i<count; i++){
+    tmp += s;
+  }
+  return tmp;
+}
+string get_repeat_chr(char c, int count){
+  string tmp;
+  for(int i=0; i<count; i++){
+    tmp += c;
+  }
+  return tmp;
+}
+
 #endif

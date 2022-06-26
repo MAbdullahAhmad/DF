@@ -25,8 +25,17 @@ class BoxManager{
     }
 
   public:
-    // Constructors
-    BoxManager(){ box_width = initial_spaces = inner_padding = 0; }
+    //> Constructors
+
+    // Default Constructor
+    BoxManager(){
+      box_width =
+      initial_spaces =
+      inner_padding =
+      0;
+    }
+    
+    //> Param-Constructor
     BoxManager(
       int bw, int is, int ip
     ){

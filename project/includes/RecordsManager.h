@@ -2,6 +2,7 @@
 #define RECORDS_MANAGER_H
 
 #include "iostream"
+#include "Menu.h"
 
 using namespace std;
 
@@ -12,9 +13,10 @@ class RecordsManager{
   protected:
   
   public:
-    OutputManager(){
-      cout << "Records manager is in nukkar.\n";
+    RecordsManager(){
+
     }
+  
 };
 
 #endif

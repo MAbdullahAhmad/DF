@@ -23,7 +23,10 @@ class MenuItem{
 
     // Default Constructor
     MenuItem(){
-      init();
+      this->active = true;
+      this->functional = false;
+      this->label = "";
+      this->menu_name = "";
     }
 
     // MenuItem without Function
@@ -31,7 +34,11 @@ class MenuItem{
       string label,
       string menu_name
     ){
-      init(label, menu_name);
+      this->active = true;
+      this->functional = false;
+      this->label = label;
+      this->menu_name = menu_name;
+      this->action = action;
     }
 
     // MenuItem with Function
@@ -40,7 +47,11 @@ class MenuItem{
       string menu_name,
       function<void()> action
     ){
-      init(label, menu_name, action);
+      this->active = true;
+      this->functional = true;
+      this->label = label;
+      this->menu_name = menu_name;
+      this->action = action;
     }
 
     // MenuItem without Function and User Provided Activity
@@ -49,7 +60,10 @@ class MenuItem{
       string label,
       string menu_name
     ){
-      init(active, label, menu_name);
+      this->active = active;
+      this->functional = true;
+      this->label = label;
+      this->menu_name = menu_name;
     }
 
     // MenuItem with Function and User Provided Activity
@@ -59,7 +73,11 @@ class MenuItem{
       string menu_name,
       function<void()> action
     ){
-      init(active, label, menu_name, action);
+      this->active = active;
+      this->functional = true;
+      this->label = label;
+      this->menu_name = menu_name;
+      this->action = action;
     }
 
     // MenuItem with Function and  User Provided Functionality
@@ -69,7 +87,11 @@ class MenuItem{
       function<void()> action,
       bool functional
     ){
-      init(label, menu_name, action, functional);
+      this->active = true;
+      this->functional = functional;
+      this->label = label;
+      this->menu_name = menu_name;
+      this->action = action;
     }
 
     // MenuItem with Function and  User Provided Activity & Functionality both
@@ -80,7 +102,11 @@ class MenuItem{
       function<void()> action,
       bool functional
     ){
-      init(active, label, menu_name, action, functional);
+      this->active = active;
+      this->functional = functional;
+      this->label = label;
+      this->menu_name = menu_name;
+      this->action = action;
     }
 
     //> Initializers
@@ -269,172 +295,107 @@ class MenuItem{
 class Menu{
   private:
     // Menu Configuration
-    bool power;
     bool menu_prefix;                  // in `Menu : <menu_name>`, show `Menu : ` or not
-    bool exit_enabled;                 // We Need `Exit` or not
+    bool exit;                         // We Need `Exit` or not
     string menu_name;                  // name of menu
     MenuItem* items; int items_length; // A for Accounts, B for Books, etc...
+    // string* labels; int labels_size;   // A, P etc.
+    // string* items; int items_size;     // Accounts, Profile etc.
     MenuItem exit;
   
-    // Helpers
-    void put_items(MenuItem* items, int items_length){
-      // Make Space
-      this->items_length = items_length;
-      this->items = new MenuItem[this->items_length];
-
-      // Put
-      for(int i=0; i<this->items_length; i++){
-        this->items[i] = items[i];
-      }
-    }
+  protected:
   
   public:
     //> Constructors
 
     // Default
     Menu(){
-      this->power =
-      this->menu_prefix =
-      this->exit_enabled =
-      true;
-      
       this->items_length = 0;
-      this->menu_name = "Default Menu";
 
-      // Default Exit
-      this->exit.init("E", "Exit");
+      this->menu_prefix = true;
+      this->menu_name = "Default Menu";
     }
 
     // Menu Name and Items
     Menu(
       string menu_name,
-      MenuItem* items,
-      int items_length
+      string* labels, int labels_size,
+      string* items, int items_size
     ){
-      this->power =
-      this->menu_prefix =
-      this->exit_enabled =
-      true;
-
       this->menu_name = menu_name;
-      this->put_items(items, items_length);
+      this->menu_prefix = true; // Default
+      
+      this->labels = labels;
+      this->labels_size = labels_size;
+      
+      this->items = items;
+      this->items_size = items_size;
 
-      // Default Exit
-      this->exit.init("E", "Exit");
+      // Default for Exit
+      this->exit_label = "E";
+      this->exit = "Exit";
     }
 
     // Menu Name and Items (with specified prefix bool)
     Menu(
       string menu_name,
       bool menu_prefix,
-      MenuItem* items,
-      int items_length
+      string* labels, int labels_size,
+      string* items, int items_size
     ){
-      this->power =
-      this->exit_enabled =
-      true;
-
-      this->menu_prefix = menu_prefix;
       this->menu_name = menu_name;
-      this->put_items(items, items_length);
+      this->menu_prefix = menu_prefix;
+      
+      this->labels = labels;
+      this->labels_size = labels_size;
+      
+      this->items = items;
+      this->items_size = items_size;
 
-      // Default Exit
-      this->exit.init("E", "Exit");
+      // Default for Exit
+      this->exit_label = "E";
+      this->exit = "Exit";
     }
 
     // Menu Name, Items And Exit
     Menu(
       string menu_name,
-      bool menu_prefix,
-      MenuItem* items,
-      int items_length,
-      MenuItem exit
+      string* labels, int labels_size,
+      string* items, int items_size,
+      string exit_label, string exit_item
     ){
-      this->power =
-      this->menu_prefix =
-      this->exit_enabled =
-      true;
-      
       this->menu_name = menu_name;
-      this->put_items(items, items_length);
-
-      this->exit = exit;
-    }
-
-    // Menu Name, Items And Exit Enable
-    Menu(
-      string menu_name,
-      bool menu_prefix,
-      MenuItem* items,
-      int items_length,
-      bool exit_enabled
-    ){
-      this->power =
-      this->menu_prefix =
-      true;
-      this->exit_enabled = exit_enabled;
+      this->menu_prefix = true; // Default
       
-      this->menu_name = menu_name;
-      this->put_items(items, items_length);
+      this->labels = labels;
+      this->labels_size = labels_size;
+      
+      this->items = items;
+      this->items_size = items_size;
 
-      if(this->exit_enabled)
-      this->exit.init("E", "Exit");
+      this->exit_label = exit_label;
+      this->exit = exit_item;
     }
 
     // Menu Name, Items and Exit (with specified prefix bool)
     Menu(
-      bool menu_prefix,
       string menu_name,
-      MenuItem* items,
-      int items_length,
-      MenuItem exit
-    ){
-      this->power =
-      this->exit_enabled =
-      true;
-
-      this->menu_prefix = menu_prefix;
-      this->menu_name = menu_name;
-      this->put_items(items, items_length);
-
-      this->exit.init("E", "Exit");
-    }
-
-
-    // Menu Name, Items and Exit Enable (with specified prefix bool)
-    Menu(
       bool menu_prefix,
-      string menu_name,
-      MenuItem* items,
-      int items_length,
-      bool exit_enabled
+      string* labels, int labels_size,
+      string* items, int items_size,
+      string exit_label, string exit_item
     ){
-      this->power = true;
-      this->exit_enabled =exit_enabled;
-      this->menu_prefix = menu_prefix;
-
       this->menu_name = menu_name;
-      this->put_items(items, items_length);
-
-      if(this->exit_enabled)
-      this->exit.init("E", "Exit");
-    }
-
-    //> Config Setters
-
-    // Enable Power
-    void enable_power(bool power){
-      this->power = power;
-    }
-
-    // Enable Menu Prefix
-    void enable_menu_prefix(bool menu_prefix){
       this->menu_prefix = menu_prefix;
-    }
+      
+      this->labels = labels;
+      this->labels_size = labels_size;
+      
+      this->items = items;
+      this->items_size = items_size;
 
-    // Enable Exit
-    void enable_exit(bool enable){
-      this->exit_enabled = enable;
+      this->exit_label = exit_label;
+      this->exit = exit_item;
     }
 
     //> Setters
@@ -444,25 +405,50 @@ class Menu{
       this->menu_name = name;
     }
 
+    // Set Labels
+    void set_labels(
+      string* labels,
+      int size
+    ){
+      this->labels = labels;
+      this->labels_size = size;
+    }
+
     // Set Items
     void set_items(
-      MenuItem* items,
-      int items_length
+      string* items,
+      int size
     ){
-      put_items(items, items_length);
+      this->items = items;
+      this->items_size = size;
     }
 
     // Set Exit
-    void set_items(
-      MenuItem exit
+    void set_exit(
+      string label,
+      string item
     ){
-      this->exit = exit;
+      this->exit_label = label;
+      this->exit = item;
     }
 
-    // Stop Menu
-    void stop_menu(){
-      this->power = false;
-    }
+    // Getter
 };
 
 #endif
+
+/*
+  class Menu:
+
+    | - what are items and labels ?
+    | > In a menu as follow
+    |  
+    |   A for Accounts
+    |   B for Boxes
+    |   C for Cats
+    |   D for Drag
+    |   
+    |   A, B, C, D are `labels`
+    |   Accounts, Boxes, Cats, Drag are `items`
+
+*/

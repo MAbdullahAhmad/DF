@@ -1,0 +1,41 @@
+#ifndef ANIMATE_H
+#define ANIMATE_H
+#define default_delay 500
+
+#include "iostream"
+#include "math.h"
+#include "chrono"
+#include "thread"
+
+using namespace std;
+
+
+void delay_millis(double sec){
+  using namespace std::this_thread;
+  using namespace std::chrono;
+
+  sleep_for(
+    nanoseconds((int)(sec * pow(10, 3)))
+  );
+}
+
+void animate_text(string text, int delay){
+    cout << text.substr(0, 2); delay_millis(delay);
+    cout << text.substr(2, 2); delay_millis(delay);
+    cout << text.substr(4, 2); delay_millis(delay);
+    cout << text.substr(6, 2);
+//   for(int i=0; i<(int)(text.length()/2); i++){
+//     cout << text.substr(i, 2);
+//     delay_millis(delay);
+//     cout << 'H';
+//   }
+//   if(text.length()%2==1) cout << text.substr(text.length()-1, 1);
+}
+void animate_text(string text){
+  animate_text(text, default_delay);
+}
+void clear(){
+  system("clear");
+}
+
+#endif

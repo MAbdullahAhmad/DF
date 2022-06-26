@@ -3,8 +3,8 @@
 
 #include "iostream"
 #include "Menu.h"
-#include "../libs/animate.h"
 #include "../libs/string_lib.h"
+#include "../libs/delay.h"
 
 using namespace std;
 
@@ -94,19 +94,19 @@ class OutputManager{
       cout << "\n\n\n";
 
       bm.draw_header();
-      bm.draw_row();
-      bm.draw_row("                __        __   _                               _");
-      bm.draw_row("                \\ \\      / /__| | ___ ___  _ __ ___   ___     | |_ ___  ");
-      bm.draw_row("                 \\ \\ /\\ / / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\    | __/ _ \\ ");
-      bm.draw_row("                  \\ V  V /  __/ | (_| (_) | | | | | |  __/    | || (_) |");
-      bm.draw_row("                   \\_/\\_/ \\___|_|\\___\\___/|_| |_| |_|\\___|     \\__\\___/ ");
-      bm.draw_row();
-      bm.draw_row("     ____  _     _        _ _           _           _      _____                    ");
-      bm.draw_row("    |  _ \\(_)___| |_ _ __(_) |__  _   _| |_ ___  __| |    |  ___|__  _ __ _ __ ___  ");
-      bm.draw_row("    | | | | / __| __| '__| | '_ \\| | | | __/ _ \\/ _` |    | |_ / _ \\| '__| '_ ` _ \\ ");
-      bm.draw_row("    | |_| | \\__ \\ |_| |  | | |_) | |_| | ||  __/ (_| |    |  _| (_) | |  | | | | | |");
-      bm.draw_row("    |____/|_|___/\\__|_|  |_|_.__/ \\__,_|\\__\\___|\\__,_|    |_|  \\___/|_|  |_| |_| |_|");
-      bm.draw_row();
+      bm.draw_row(); delay_millis(200);
+      bm.draw_row("                __        __   _                               _"); delay_millis(200);
+      bm.draw_row("                \\ \\      / /__| | ___ ___  _ __ ___   ___     | |_ ___  "); delay_millis(200);
+      bm.draw_row("                 \\ \\ /\\ / / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\    | __/ _ \\ "); delay_millis(200);
+      bm.draw_row("                  \\ V  V /  __/ | (_| (_) | | | | | |  __/    | || (_) |"); delay_millis(200);
+      bm.draw_row("                   \\_/\\_/ \\___|_|\\___\\___/|_| |_| |_|\\___|     \\__\\___/ "); delay_millis(200);
+      bm.draw_row(); delay_millis(200);
+      bm.draw_row("     ____  _     _        _ _           _           _      _____                    "); delay_millis(200);
+      bm.draw_row("    |  _ \\(_)___| |_ _ __(_) |__  _   _| |_ ___  __| |    |  ___|__  _ __ _ __ ___  "); delay_millis(200);
+      bm.draw_row("    | | | | / __| __| '__| | '_ \\| | | | __/ _ \\/ _` |    | |_ / _ \\| '__| '_ ` _ \\ "); delay_millis(200);
+      bm.draw_row("    | |_| | \\__ \\ |_| |  | | |_) | |_| | ||  __/ (_| |    |  _| (_) | |  | | | | | |"); delay_millis(200);
+      bm.draw_row("    |____/|_|___/\\__|_|  |_|_.__/ \\__,_|\\__\\___|\\__,_|    |_|  \\___/|_|  |_| |_| |_|"); delay_millis(200);
+      bm.draw_row(); delay_millis(200);
       bm.draw_footer();
 
       cout << "\n\n\n";

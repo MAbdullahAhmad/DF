@@ -19,11 +19,16 @@ void s_for(int t){
 }
 
 // Levels : to put in master
-void delay_seconds(double t){
-  s_for((int)(t * pow(10, 9)));
-}
 void delay_millis(double t){
   s_for((int)(t * pow(10, 6)));
+}
+void delay_seconds(int t){
+  delay_millis(200);
+  delay_millis(200);
+  delay_millis(200);
+  delay_millis(200);
+  delay_millis(200);
+  if(t>0) delay_seconds(t-1);
 }
 
 #endif

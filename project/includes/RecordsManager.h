@@ -2,13 +2,13 @@
 #define RECORDS_MANAGER_H
 
 #include "iostream"
-#include "Menu.h"
+// #include "Menu.h"
 
 using namespace std;
 
 class RecordsManager{
   private:
-    Menu m;
+    // Menu m;
 
   protected:
   

@@ -2,7 +2,7 @@
 #define OUTPUT_MANAGER_H
 
 #include "iostream"
-#include "Menu.h"
+// #include "Menu.h"
 #include "../libs/string_lib.h"
 #include "../libs/delay.h"
 
@@ -88,7 +88,7 @@ class BoxManager{
 // Output Manager : Main Class
 class OutputManager{
   private:
-    Menu m;
+    // Menu m;
     BoxManager bm;
 
   protected:

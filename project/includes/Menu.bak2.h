@@ -175,12 +175,6 @@ class MenuItem{
     void set_action(function<void()> action){
       this->action = action;
     }
-    // void set_action(void (*func)()){
-    //   // this->action = action;
-    // }
-    // void set_action(void (Menu::*)()){
-    //   // this->action = action;
-    // }
 
     //> Outputs
 
@@ -309,7 +303,7 @@ class Menu{
 
       // Default Exit
       this->exit.init("E", "Exit");
-      this->exit.set_action(&this->stop_menu);
+      this->exit.set_action(this->stop_menu);
     }
 
     // Menu Name and Items
@@ -328,7 +322,7 @@ class Menu{
 
       // Default Exit
       this->exit.init("E", "Exit");
-      this->exit.set_action(&this->stop_menu);
+      this->exit.set_action(this->stop_menu);
     }
 
     // Menu Name and Items (with specified prefix bool)
@@ -348,7 +342,7 @@ class Menu{
 
       // Default Exit
       this->exit.init("E", "Exit");
-      this->exit.set_action(&this->stop_menu);
+      this->exit.set_action(this->stop_menu);
     }
 
     // Menu Name, Items And Exit
@@ -368,7 +362,7 @@ class Menu{
       this->put_items(items, items_length);
 
       this->exit = exit;
-      this->exit.set_action(&this->stop_menu);
+      this->exit.set_action(this->stop_menu);
     }
 
     // Menu Name, Items And Exit Enable
@@ -389,8 +383,8 @@ class Menu{
 
       if(this->exit_enabled)
       this->exit.init("E", "Exit");
-      this->exit.set_action(&this->stop_menu);
-      this->exit.set_action(&this->stop_menu);
+      this->exit.set_action(this->stop_menu);
+      this->exit.set_action(this->stop_menu);
     }
 
     // Menu Name, Items and Exit (with specified prefix bool)
@@ -410,7 +404,7 @@ class Menu{
       this->put_items(items, items_length);
 
       this->exit.init("E", "Exit");
-      this->exit.set_action(&this->stop_menu);
+      this->exit.set_action(this->stop_menu);
     }
 
 
@@ -431,7 +425,7 @@ class Menu{
 
       if(this->exit_enabled)
       this->exit.init("E", "Exit");
-      this->exit.set_action(&this->stop_menu);
+      this->exit.set_action(this->stop_menu);
     }
 
     //> Config Setters
@@ -471,7 +465,7 @@ class Menu{
       MenuItem exit
     ){
       this->exit = exit;
-      this->exit.set_action(&this->stop_menu);
+      this->exit.set_action(this->stop_menu);
     }
 
     // Stop Menu

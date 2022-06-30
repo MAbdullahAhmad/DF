@@ -3,6 +3,7 @@
 
 #include "iostream"
 #include "ctime"
+#include "../libs/char_array.h"
 #include "../libs/string_lib.h"
 
 using namespace std;
@@ -76,6 +77,19 @@ class TokenModel{
       updated_ts(this->get_current_ts()){}
 
     TokenModel(
+      int i,
+      char* ti
+    ):
+      id(i),
+      created_ts(this->get_current_ts()),
+      updated_ts(this->get_current_ts())
+    {
+      for(int i=0; i<32; i++){
+        this->token_id[i] = ti[i];
+      }
+    }
+
+    TokenModel(
       time_t c, time_t u
     ):
       id(0),
@@ -87,6 +101,17 @@ class TokenModel{
     ):
       id(i),
       created_ts(c), updated_ts(u){}
+      
+    TokenModel(
+      int i,
+      char* ti,
+      time_t c, time_t u
+    ):
+      id(i),
+      created_ts(c), updated_ts(u)
+    {
+      deep_copy(this->token_id, ti, 32);
+    }
 };
 
 #endif

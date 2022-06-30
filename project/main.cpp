@@ -1,15 +1,15 @@
 #include "iostream"
-#include "includes/OutputManager.h"
-#include "includes/Pages/WelcomePage.h"
+
+// Pages
+#include "includes/Models/User.h"
+
 using namespace std;
 
-OutputManager output_manager;
-WelcomePage wp;
 
 int main(){
-  output_manager.welcome();
-
-  output_manager.execute(&wp);
+  User u;
+  if(!u.create()) cout << "Not ";
+  cout << "Created\n";
 
   return 0;
 }

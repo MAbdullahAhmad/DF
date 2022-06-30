@@ -195,11 +195,6 @@ class CRUD{
       return true;
     }
 
-
-    Entity* read(){
-
-    }
-
     // Read All
     vector<Entity> all(){
       return this->reader->all();

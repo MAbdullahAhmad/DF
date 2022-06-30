@@ -11,17 +11,14 @@ int main(){
   User* u = new User();
   // u->crud()->create();
 
-  bool r = u->crud()->create();
-  if(r){
+  if(u->crud()->create()){
     cout << "Created\n";
   } else {
     cout << "Error";
     return 0;
   }
   
-  vector<User> users = u->crud()->all();
-  cout << users.size() << '\n';
-  for(User u : users){
+  for(User u : u->crud()->all()){
     cout << u.get_id() << '\n';
   }
 

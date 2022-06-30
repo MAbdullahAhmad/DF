@@ -106,51 +106,31 @@ class CRUD{
   private:
     Entity* obj;
     string table;
-    Reader<Entity>* reader;
-
-    // Helpers
-    void reader_init(){
-      this->reader = new Reader<Entity>(
-        crud_loc_prefix + this->table + crud_loc_postfix
-      );
-    }
 
   public:
     //> Constructors
     CRUD():
       obj(nullptr),
-      table("")
-    {
-      this->reader_init();
-    }
+      table(""){}
 
     CRUD(
       Entity* obj
     ):
       obj(obj),
-      table("")
-    {
-      this->reader_init();
-    }
+      table(""){}
 
     CRUD(
       string tbl
     ):
       obj(nullptr),
-      table(tbl)
-    {
-      this->reader_init();
-    }
+      table(tbl){}
 
     CRUD(
       Entity* obj,
       string tbl
     ):
       obj(obj),
-      table(tbl)
-    {
-      this->reader_init();
-    }
+      table(tbl){}
 
     // Setters
     void set_obj(Entity obj){
@@ -197,7 +177,10 @@ class CRUD{
 
     // Read All
     vector<Entity> all(){
-      return this->reader->all();
+      Reader<Entity> records(
+        crud_loc_prefix + this->table + crud_loc_postfix
+      );
+      return records.all();
     }
 };
 

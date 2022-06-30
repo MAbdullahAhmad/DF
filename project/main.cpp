@@ -6,19 +6,22 @@
 
 using namespace std;
 
-
 int main(){
-  User* u = new User();
-  // u->crud()->create();
+  // User* u = new User();
 
-  if(u->crud()->create()){
+  User u;
+  cout << "Hello\n";
+  u.crud()->create();
+
+
+  if(u.crud()->create()){
     cout << "Created\n";
   } else {
     cout << "Error";
     return 0;
   }
   
-  for(User u : u->crud()->all()){
+  for(User u : u.crud()->all()){
     cout << u.get_id() << '\n';
   }
 

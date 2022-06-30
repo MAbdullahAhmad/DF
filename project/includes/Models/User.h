@@ -94,7 +94,6 @@ class User : public TokenModel{
       return this->_crud;
     }
 
-
 };
 
 #endif

@@ -10,7 +10,7 @@ int main(){
   User u;
 
   // Create
-  u.crud()->create();
+  // u.crud()->create();
 
   u.set_id(5);
   // Update

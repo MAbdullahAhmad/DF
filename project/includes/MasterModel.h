@@ -10,6 +10,7 @@ using namespace std;
 
 class MasterModel{
   protected:
+    // Props
     int id;
     time_t created_ts;
     time_t updated_ts;
@@ -44,10 +45,37 @@ class MasterModel{
     ):
       id(i),
       created_ts(c), updated_ts(u){}
+
+    //> Setters
+    void set_id(int id){
+      this->id = id;
+    }
+
+    void set_created_ts(time_t created_ts){
+      this->created_ts = created_ts;
+    }
+
+    void set_updated_ts(time_t updated_ts){
+      this->updated_ts = updated_ts;
+    }
+
+    //> Getters
+    int get_id(){
+      return this->id;
+    }
+
+    time_t get_created_ts(){
+      return this->created_ts;
+    }
+
+    time_t get_updated_ts(){
+      return this->updated_ts;
+    }
 };
 
 class TokenModel{
   protected:
+    // Props
     int id;
     char token_id[32];
     time_t created_ts;
@@ -111,6 +139,40 @@ class TokenModel{
       created_ts(c), updated_ts(u)
     {
       deep_copy(this->token_id, ti, 32);
+    }
+
+    //> Setters
+    void set_id(int id){
+      this->id = id;
+    }
+
+    void set_token_id(char* token_id){
+      deep_copy(this->token_id, token_id, 32);
+    }
+
+    void set_created_ts(time_t created_ts){
+      this->created_ts = created_ts;
+    }
+
+    void set_updated_ts(time_t updated_ts){
+      this->updated_ts = updated_ts;
+    }
+
+    //> Getters
+    int get_id(){
+      return this->id;
+    }
+
+    char* get_token_id(){
+      return this->token_id;
+    }
+
+    time_t get_created_ts(){
+      return this->created_ts;
+    }
+
+    time_t get_updated_ts(){
+      return this->updated_ts;
     }
 };
 

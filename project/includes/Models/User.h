@@ -12,7 +12,7 @@ using namespace std;
 class User : public TokenModel{
   private:
     // CRUD Obj
-    CRUD<User>* crud;
+    CRUD<User>* _crud;
 
     // Entity Props
     char nick[50];
@@ -25,7 +25,7 @@ class User : public TokenModel{
     //> Constructors
     User():
       TokenModel(),
-      crud(new CRUD<User>(this, "users")){}
+      _crud(new CRUD<User>(this, "users")){}
 
     User(
       int i,
@@ -45,7 +45,7 @@ class User : public TokenModel{
       }
 
     bool create(){
-      return crud->create();
+      return _crud->create();
     }
 
     //> Setters
@@ -88,6 +88,10 @@ class User : public TokenModel{
 
     char get_role(){
       return this->role;
+    }
+
+    CRUD<User>* crud(){
+      return this->_crud;
     }
 
 

@@ -11,7 +11,7 @@ using namespace std;
 class Server : public TokenModel{
   private:
     // CRUD Obj
-    CRUD<Server>* crud;
+    CRUD<Server>* _crud;
 
     // Entity Props
     int server_tag;
@@ -20,7 +20,7 @@ class Server : public TokenModel{
     //> Constructors
     Server():
       TokenModel(),
-      crud(new CRUD<Server>(this, "servers")){}
+      _crud(new CRUD<Server>(this, "servers")){}
 
     Server(
       int i,
@@ -32,8 +32,8 @@ class Server : public TokenModel{
       TokenModel(i, ti, ct, ut),
       server_tag(st){}
 
-    bool create(){
-      return crud->create();
+    CRUD<Server>* crud(){
+      return this->_crud;
     }
 };
 

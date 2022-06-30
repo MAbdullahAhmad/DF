@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(){
-  CRUD crud;
+  CRUD ios::binary;
 
   return 0;
 }

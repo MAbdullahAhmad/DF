@@ -282,35 +282,33 @@ template<class Entity>
 class Deleter{
   private:
     string   file_name;
+    fstream  file,       tmp_file;
     Entity   *record,    *tmp_record;
     int      count,      tmp_count;
 
     //> Helpers
 
     // Open File
-    void open_r(fstream *file){
-      file->open(
+    void open(bool in){
+      this->file.clear();
+      this->file.open(
         this->file_name,
-        ios::binary | ios::in
+        ios::binary | (in ? ios::in : ios::out) 
+        ios::binary | (in ? ios::in : ios::out) 
       );
     }
-    void open_w(fstream *file){
-      file->open(
-        this->file_name,
-        ios::binary | ios::out
-      );
+    void open(){
+      this->open(true);
     }
-    void topen_r(fstream *file){
-      file->open(
+    void tmp_open(bool out){
+      this->tmp_file.clear();
+      this->tmp_file.open(
         tmp_file_name,
-        ios::binary | ios::in
+        ios::binary | (out ? ios::out : ios::in)
       );
     }
-    void topen_w(fstream *file){
-      file->open(
-        tmp_file_name,
-        ios::binary | ios::out
-      );
+    void tmp_open(){
+      this->tmp_open(true);
     }
 
   public:
@@ -328,6 +326,9 @@ class Deleter{
     void set_record(Entity record){
       this->record = record;
     }
+    void set_file(string file_name){
+      this->file_name = file_name;
+    }
 
     //> Getters
     Entity* get_record(){
@@ -336,48 +337,47 @@ class Deleter{
     string get_file_name(){
       return this->file_name;
     }
+    fstream get_file(){
+      return file;
+    }
 
     //> Start, Read, Write, Next, Get, Stop, Size
-    void start(fstream *file, fstream *tmp){
+    void start(bool in){
       this->count = 0;
-      this->tmp_count = 0;
-
-      this->open_r(file);
-      this->open_w(tmp);
-
+      this->open(in);
       this->record = new Entity();
-      this->tmp_record = new Entity();
     }
-    void rstart(fstream *tmp, fstream *file){
-      this->count = 0;
+    void start(){
+      this->start(true);
+    }
+    void tmp_start(bool out){
       this->tmp_count = 0;
-
-      this->open_r(tmp);
-      this->open_w(file);
-      
+      this->tmp_open(out);
       this->record = new Entity();
-      this->tmp_record = new Entity();
     }
-    bool read(fstream *file){
-      return (bool)file->read(
+    void tmp_start(){
+      this->tmp_start(true);
+    }
+    bool read(){
+      return (bool)this->file.read(
         (char*)this->record,
         sizeof(Entity)
       ) && (bool)(++this->count);
     }
-    bool rread(fstream *tmp){
-      return (bool)tmp->read(
+    bool tmp_read(){
+      return (bool)this->tmp_file.read(
         (char*)this->tmp_record,
         sizeof(Entity)
       ) && (bool)(++this->tmp_count);
     }
-    bool write(fstream *tmp, Entity &record){
-      return (bool)tmp->write(
+    bool write(Entity &record){
+      return (bool)this->file.write(
         (char*)&record,
         sizeof(Entity)
       );
     }
-    bool rwrite(fstream *file, Entity &record){
-      return (bool)file->write(
+    bool tmp_write(Entity &record){
+      return (bool)this->tmp_file.write(
         (char*)&record,
         sizeof(Entity)
       );
@@ -385,21 +385,24 @@ class Deleter{
     Entity* get(){
       return this->record;
     }
-    Entity* rget(){
+    Entity* tmp_get(){
       return this->tmp_record;
     }
-    Entity* next(fstream *file){
-      return this->read(file) ?
+    Entity* next(){
+      return this->read() ?
         this->record :
         nullptr;
     }
-    Entity* rnext(fstream *tmp){
-      return this->rread(tmp) ?
+    Entity* tmp_next(){
+      return this->tmp_read() ?
         this->tmp_record :
         nullptr;
     }
-    void end(fstream *file){
-      file->close();
+    void end(){
+      this->file.close();
+    }
+    void tmp_end(){
+      this->tmp_file.close();
     }
     int size(){
       return this->count;
@@ -413,51 +416,41 @@ class Deleter{
       Entity* rec = new Entity;
       bool deleted = false;
 
-      fstream file; this->open_r(&file);
-      fstream tmp; this->open_w(&tmp);
-
       // Start File and Temp File
-      this->start(&file, &tmp);
+      this->start(); this->tmp_start();
 
       // File to Tmp (except deletion)
-      while(rec = this->next(&file))
-        if((!all && deleted) || rec->get_id() != record_id){
-          if(!this->write(&tmp, *rec)){
-            cout << "Deleted\n"; //@debug
+      while(rec = this->next())
+        if((!all && deleted) || rec->get_id() != record_id)
+          if(!this->tmp_write(*rec))
             return false;
-          }
           // else continue;
           else cout << "Written Alpha\n"; //@debug
-        }
-        else if (!all){
-          cout << "Eq: " << rec->get_id() << " <-> " << record_id << '\n'; //@debug
-          deleted = true;
-        }
+        else if (!all) deleted = true;
 
       // Close both
-      this->end(&file);
-      this->end(&tmp);
-
-      fstream rtmp; this->open_r(&rtmp);
-      // fstream rfile; this->open_w(&rfile);
+      this->end(); this->tmp_end();
 
       // Start Temp and File in Reverse Mode
-      // this->rstart(&rtmp, &rfile);
+      this->tmp_start(false); this->start(false);
       cout << "Beta St\n"; //@debug
 
+      // // Tmp to File
+      // while(rec = this->tmp_next())
+      //   if(!this->write(*rec))
+      //     return false;
+      //   else cout << "Written\n"; //@debug
+
       // Tmp to File
-      while(rec = this->rnext(&rtmp)){
+      while(rec = this->tmp_next()){
         cout << "Beta Next\n"; //@debug
-        // if(!this->write(&rfile, *rec))
-        if(false)
+        if(!this->write(*rec))
           return false;
-          // continue; //@debug
         else cout << "Written\n"; //@debug
       }
 
       // Close both
-      // this->end(&rfile);
-      this->end(&rtmp);
+      this->tmp_end(); this->end();
 
       return true;
     }

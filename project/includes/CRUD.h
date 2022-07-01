@@ -8,11 +8,11 @@
 using namespace std;
 
 // Global Config
-string crud_loc_prefix = cwd() + "records/";
-string crud_loc_postfix = ".dat";
-string tmp_file_name = crud_loc_prefix + "tmp" + crud_loc_postfix;
+string crud_loc_prefix   =  cwd() + "records/";
+string crud_loc_postfix  =  ".dat";
+string tmp_file_name     =  crud_loc_prefix + "tmp" + crud_loc_postfix;
 
-// Reader Class
+//> Class: `Reader`
 template<class Entity>
 class Reader{
   private:
@@ -117,6 +117,7 @@ class Reader{
     }
 };
 
+//> Class: `Updater`
 template<class Entity>
 class Updater{
   private:
@@ -277,7 +278,7 @@ class Updater{
     }
 };
 
-
+//> Class: `Deleter`
 template<class Entity>
 class Deleter{
   private:
@@ -384,7 +385,7 @@ class Deleter{
     }
 };
 
-// CRUD class
+//> Class: `CRUD`
 template<class Entity>
 class CRUD{
   private:

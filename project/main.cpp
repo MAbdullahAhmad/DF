@@ -48,13 +48,13 @@ int main(){
   // }
 
   User u;
-  u.set_id(13);
+  u.set_id(9);
   u.crud()->create();
   if(!u.crud()->read()) cout << "Not "; cout << "Read\n";
 
   cout << u.get_id() << '\n';
 
-  // u.crud()->del();
+  u.crud()->del();
 
   // cout << "BEF\n";
   vector<User> users = u.crud()->all();

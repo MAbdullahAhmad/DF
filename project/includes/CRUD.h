@@ -410,56 +410,110 @@ class Deleter{
 
     // Delete (Base)
     bool del(int record_id, bool all){
-      Entity* rec = new Entity;
+      Entity rec;
       bool deleted = false;
 
-      fstream file; this->open_r(&file);
-      fstream tmp; this->open_w(&tmp);
+      // Files
+      ifstream file(
+        this->file_name,
+        ios::binary
+      );
+      ofstream tmp(
+        tmp_file_name,
+        ios::binary | ios::trunc
+      );
 
-      // Start File and Temp File
-      this->start(&file, &tmp);
+      if(!all) cout << "Not "; cout << "All\n";
 
-      // File to Tmp (except deletion)
-      while(rec = this->next(&file))
-        if((!all && deleted) || rec->get_id() != record_id){
-          if(!this->write(&tmp, *rec)){
-            cout << "Deleted\n"; //@debug
-            return false;
-          }
-          // else continue;
-          else cout << "Written Alpha\n"; //@debug
-        }
-        else if (!all){
-          cout << "Eq: " << rec->get_id() << " <-> " << record_id << '\n'; //@debug
+      while(
+        file.read(
+          (char*)&rec,
+          sizeof(Entity)
+        )
+      ){
+        // cout << record_id << '\n';
+        // cout << rec.get_id() << '\n';
+        
+        //@debug
+        cout << rec.get_id() << " -> ";
+        cout << "CND: (";
+        if((record_id == rec.get_id())) cout << "1"; else cout << "0";
+        cout << ") && ";
+        cout << "(";
+        if(all) cout << "1"; else cout << "0";
+        cout << " || ";
+        if((!deleted && !all)) cout << "1"; else cout << "0";
+        cout << ")\n";
+
+
+        // (record_id == rec.get_id()) && (all || (!deleted && !all))
+
+        if((record_id == rec.get_id()) && (all || (!deleted && !all))){
           deleted = true;
-        }
+          continue;
+        } else cout << "LT: " << rec.get_id() << '\n';
+        // cout << "Writing " << rec.get_id() << '\n';
 
-      // Close both
-      this->end(&file);
-      this->end(&tmp);
+        if(!
+          (bool)tmp.write(
+            (char*)&rec,
+            sizeof(Entity)
+          )
+        ) return false;
 
-      fstream rtmp; this->open_r(&rtmp);
-      // fstream rfile; this->open_w(&rfile);
+        // if(
+        //   // 
+        //   rec.get_id() != record_id
+        // ){
+        //   if(!
+        //     (bool)tmp.write(
+        //       (char*)&rec,
+        //       sizeof(Entity)
+        //     )
+        //   ) return false;
+        //   // else continue;
+        //   else cout << "Deleted\n"; //@debug
+        // }
+        // else if (!all)
+        //   deleted = true;
+      }
 
-      // Start Temp and File in Reverse Mode
-      // this->rstart(&rtmp, &rfile);
-      cout << "Beta St\n"; //@debug
+      file.close();
+      tmp.close();
+      
+      // Reverse Files
+      ifstream rtmp(
+        tmp_file_name,
+        ios::binary
+      );
+      ofstream rfile(
+        this->file_name,
+        ios::binary | ios::trunc
+      );
 
       // Tmp to File
-      while(rec = this->rnext(&rtmp)){
+      while(
+        rtmp.read(
+          (char*)&rec,
+          sizeof(Entity)
+        )
+      ){
         cout << "Beta Next\n"; //@debug
-        // if(!this->write(&rfile, *rec))
-        if(false)
-          return false;
+        if(!
+          (bool)rfile.write(
+            (char*)&rec,
+            sizeof(Entity)
+          )
+        ) return false;
           // continue; //@debug
         else cout << "Written\n"; //@debug
       }
 
       // Close both
-      // this->end(&rfile);
-      this->end(&rtmp);
+      rtmp.close();
+      rfile.close();
 
-      return true;
+      return deleted;
     }
 
     // Delete One
@@ -614,12 +668,17 @@ class CRUD{
     // Delete All
     bool del_all(int id){
       // Init Deleter
-      Updater<Entity> deleter(
+      Deleter<Entity> deleter(
         crud_loc_prefix + this->table + crud_loc_postfix
       );
 
       // Update & Return
       return deleter.del_all(id);
+    }
+
+    // Delete All
+    bool del_all(){
+      return this->del_all(this->obj->get_id());
     }
 };
 

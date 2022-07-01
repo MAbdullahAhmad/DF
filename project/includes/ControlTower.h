@@ -29,8 +29,8 @@ struct Route{
   }
 
   // Fire Controller
-  void fire(){
-    controller->fire();
+  string fire(){
+    return controller->fire();
   }
 };
 
@@ -93,7 +93,7 @@ class ControlTower{
         if(r.match(q)){
           this->fired = true;
           q = "";
-          r.fire();
+          this->qry = r.fire();
           return true;
         }
 

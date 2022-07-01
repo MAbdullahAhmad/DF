@@ -2,12 +2,13 @@
 #define MASTER_CONTROLLER_H
 
 #include "iostream"
+using namespace std;
 
 class MasterController{
   private:
 
   public:
-    virtual void fire() = 0;
+    virtual string fire() = 0;
 };
 
 using namespace std;

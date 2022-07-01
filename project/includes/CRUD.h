@@ -281,42 +281,12 @@ class Updater{
 template<class Entity>
 class Deleter{
   private:
-    string   file_name;
-    Entity   *record,    *tmp_record;
-    int      count,      tmp_count;
-
-    //> Helpers
-
-    // Open File
-    void open_r(fstream *file){
-      file->open(
-        this->file_name,
-        ios::binary | ios::in
-      );
-    }
-    void open_w(fstream *file){
-      file->open(
-        this->file_name,
-        ios::binary | ios::out
-      );
-    }
-    void topen_r(fstream *file){
-      file->open(
-        tmp_file_name,
-        ios::binary | ios::in
-      );
-    }
-    void topen_w(fstream *file){
-      file->open(
-        tmp_file_name,
-        ios::binary | ios::out
-      );
-    }
+    string file_name;
 
   public:
     //> Constructors
     Deleter():
-      record(nullptr){}
+      file_name(""){}
 
     Deleter(
       string file_name
@@ -325,87 +295,13 @@ class Deleter{
     }
 
     //> Setters
-    void set_record(Entity record){
-      this->record = record;
+    void set_file_name(string file_name){
+      this->file_name = file_name;
     }
 
     //> Getters
-    Entity* get_record(){
-      return &this->record;
-    }
     string get_file_name(){
       return this->file_name;
-    }
-
-    //> Start, Read, Write, Next, Get, Stop, Size
-    void start(fstream *file, fstream *tmp){
-      this->count = 0;
-      this->tmp_count = 0;
-
-      this->open_r(file);
-      this->open_w(tmp);
-
-      this->record = new Entity();
-      this->tmp_record = new Entity();
-    }
-    void rstart(fstream *tmp, fstream *file){
-      this->count = 0;
-      this->tmp_count = 0;
-
-      this->open_r(tmp);
-      this->open_w(file);
-      
-      this->record = new Entity();
-      this->tmp_record = new Entity();
-    }
-    bool read(fstream *file){
-      return (bool)file->read(
-        (char*)this->record,
-        sizeof(Entity)
-      ) && (bool)(++this->count);
-    }
-    bool rread(fstream *tmp){
-      return (bool)tmp->read(
-        (char*)this->tmp_record,
-        sizeof(Entity)
-      ) && (bool)(++this->tmp_count);
-    }
-    bool write(fstream *tmp, Entity &record){
-      return (bool)tmp->write(
-        (char*)&record,
-        sizeof(Entity)
-      );
-    }
-    bool rwrite(fstream *file, Entity &record){
-      return (bool)file->write(
-        (char*)&record,
-        sizeof(Entity)
-      );
-    }
-    Entity* get(){
-      return this->record;
-    }
-    Entity* rget(){
-      return this->tmp_record;
-    }
-    Entity* next(fstream *file){
-      return this->read(file) ?
-        this->record :
-        nullptr;
-    }
-    Entity* rnext(fstream *tmp){
-      return this->rread(tmp) ?
-        this->tmp_record :
-        nullptr;
-    }
-    void end(fstream *file){
-      file->close();
-    }
-    int size(){
-      return this->count;
-    }
-    int tmp_size(){
-      return this->tmp_count;
     }
 
     // Delete (Base)
@@ -423,36 +319,16 @@ class Deleter{
         ios::binary | ios::trunc
       );
 
-      if(!all) cout << "Not "; cout << "All\n";
-
       while(
         file.read(
           (char*)&rec,
           sizeof(Entity)
         )
       ){
-        // cout << record_id << '\n';
-        // cout << rec.get_id() << '\n';
-        
-        //@debug
-        cout << rec.get_id() << " -> ";
-        cout << "CND: (";
-        if((record_id == rec.get_id())) cout << "1"; else cout << "0";
-        cout << ") && ";
-        cout << "(";
-        if(all) cout << "1"; else cout << "0";
-        cout << " || ";
-        if((!deleted && !all)) cout << "1"; else cout << "0";
-        cout << ")\n";
-
-
-        // (record_id == rec.get_id()) && (all || (!deleted && !all))
-
         if((record_id == rec.get_id()) && (all || (!deleted && !all))){
           deleted = true;
           continue;
-        } else cout << "LT: " << rec.get_id() << '\n';
-        // cout << "Writing " << rec.get_id() << '\n';
+        }
 
         if(!
           (bool)tmp.write(
@@ -460,22 +336,6 @@ class Deleter{
             sizeof(Entity)
           )
         ) return false;
-
-        // if(
-        //   // 
-        //   rec.get_id() != record_id
-        // ){
-        //   if(!
-        //     (bool)tmp.write(
-        //       (char*)&rec,
-        //       sizeof(Entity)
-        //     )
-        //   ) return false;
-        //   // else continue;
-        //   else cout << "Deleted\n"; //@debug
-        // }
-        // else if (!all)
-        //   deleted = true;
       }
 
       file.close();
@@ -498,15 +358,12 @@ class Deleter{
           sizeof(Entity)
         )
       ){
-        cout << "Beta Next\n"; //@debug
         if(!
           (bool)rfile.write(
             (char*)&rec,
             sizeof(Entity)
           )
         ) return false;
-          // continue; //@debug
-        else cout << "Written\n"; //@debug
       }
 
       // Close both

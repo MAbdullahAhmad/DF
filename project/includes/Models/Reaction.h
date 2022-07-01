@@ -7,14 +7,14 @@
 
 using namespace std;
 
-// CRUD class
+// Reaction Class
 class Reaction: public TokenModel{
   private:
     // CRUD Obj
     CRUD<Reaction>* _crud;
 
     // Entity Props
-    char lable[20];
+    char label[20];
     char ascii[10];
 
   public:
@@ -26,39 +26,30 @@ class Reaction: public TokenModel{
     Reaction(
       int i,
       char* ti,
-      int si, // server_id
-      char* l,
+      char* label,
       char* ascii,
       time_t ct, time_t ut
     ):
       TokenModel(i, ti, ct, ut),
-      server_id(si),
-      post_id(pi),
-      Reactions(l,ascii)
-
     {
-        deep_copy(this->lable,l, 20);
+        deep_copy(this->lable, label, 20);
         deep_copy(this->ascii, ascii, 10);
     }
 
     //> Setters
-
-    void set_lable(char* lable){
-      deep_copy(this->lable, l, 20);
+    void set_label(char* label){
+      deep_copy(this->label, label, 20);
     }
     void set_ascii(char* ascii){
       deep_copy(this->ascii, ascii, 10);
     }
 
-
-    // Getters
-
+    //> Getters
      char* get_ascii(){
       return this->ascii;
     }
-
-     char* get_lable(){
-      return this->lable;
+     char* get_label(){
+      return this->label;
     }
    
     CRUD<Reaction>* crud(){

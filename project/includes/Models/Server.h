@@ -7,7 +7,7 @@
 
 using namespace std;
 
-// CRUD class
+//> Server
 class Server : public TokenModel{
   private:
     // CRUD Obj
@@ -37,15 +37,14 @@ class Server : public TokenModel{
 
     //> Setters
 
-    void set_ServerTag(char* title){
+    void set_server_tag(char* title){
       deep_copy(this->server_tag, si);
     }
 
     //> Getters
-     char* get_ServerTag(){
+     char* get_server_tag(){
       return this->server_tag;
     }
-
 
     CRUD<Server>* crud(){
       return this->_crud;

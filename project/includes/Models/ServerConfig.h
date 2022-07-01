@@ -7,7 +7,7 @@
 
 using namespace std;
 
-// CRUD class
+//> ServerConfig Class
 class ServerConfig : public TokenModel{
   private:
     // CRUD Obj
@@ -27,14 +27,13 @@ class ServerConfig : public TokenModel{
     ServerConfig(
       int i,
       char* ti,
-      int si, // server_id
+      int si,
       char* key,
       char* value
       time_t ct, time_t ut
     ):
       TokenModel(i, ti, ct, ut),
       server_id(si),
-      servers(key,value)
     {
         deep_copy(this->key, key, 50);
         deep_copy(this->value,value, 50);

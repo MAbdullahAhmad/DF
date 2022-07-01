@@ -7,17 +7,17 @@
 
 using namespace std;
 
-// CRUD class
+//> Post Class
 class Post : public TokenModel{
   private:
     // CRUD Obj
     CRUD<Post>* _crud;
 
     // Entity Props
-    int ai;
-    int pi;
+    int author_id;
     char title[256];
     char content[20000];
+    int type;
 
   public:
     //> Constructors
@@ -27,50 +27,51 @@ class Post : public TokenModel{
 
     Post(
       int i,
-      int pi,
       char* ti,
-      int ai,
+      int server_id,
+      int author_id,
       char* title,
       char* content,
+      int type,
       time_t ct, time_t ut
     ):
       TokenModel(i, ti, ct, ut),
       server_id(si),
-      Channel(title,type),
-      post(content,pi,ai)
+      author_id(author_id),
+      type(type)
     {
+      deep_copy(this->title, title, 256);
       deep_copy(this->content, content, 20000);
-      deep_copy(this-> pi,pi);
-      deep_copy(this-> ai,ai);
     }
 
     //> Setters
 
-    void set_type(char* ){content
+    void set_server_id(int server_id){
+      this->server_id = server_id;
+    }
+    void set_author_id(int author_id){
+      deep_copy(this->author_id, author_id);
+    }
+    void set_content(char *content){
       deep_copy(this->content, content, 20000);
     }
-
-    void set_PostId(int pi){
-      deep_copy(this->pi, pi);
-    }
-
-    void set_AuthorId(int ai){
-      deep_copy(this->ai, ai);
+    void set_type(int type){
+      this->type = type;
     }
 
     //> Getters
-    
 
-    char* get_Content(){
+    int get_server_id(){
+      return this->server_id;
+    }
+    int get_author_id(){
+      return this->author_id;
+    }
+    char* get_content(){
       return this->content;
     }
-
-    int get_PostId(){
-      return this->pi;
-    }
-
-    int get_AuthorId(){
-      return this->ai;
+    int get_type(){
+      return this->type;
     }
    
     CRUD<Post>* crud(){

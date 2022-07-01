@@ -7,13 +7,15 @@
 
 using namespace std;
 
-// CRUD class
-class Comment : public TokenModel{
+//> PostComment class
+class PostComment : public TokenModel{
   private:
     // CRUD Obj
     CRUD<Comment>* _crud;
 
     // Entity Props
+    int post_id;
+    int user_id;
     char* comment[300];
 
   public:
@@ -21,30 +23,41 @@ class Comment : public TokenModel{
     Comment():
       TokenModel(),
       _crud(new CRUD<Comment>(this, "Comments")){}
-type, type, 30);
        
     Comment(
       int i,
       char* ti,
-      int pi, // post_id
-      char* com,
+      int post_id,
+      int user_id,
+      char* comment,
       time_t ct, time_t ut
     ):
       TokenModel(i, ti, ct, ut),
-      server_id(si),
-      post_id(pi),
-      comment(com)
+      post_id(post_id),
+      user_id(user_id)
     {
         deep_copy(this->comment, com, 300);
     }
 
-  //> Setters
-    void set_Comment(char* comment){
+    //> Setters
+    void set_post_id(int post_id){
+      this->post_id = post_id;
+    }
+    void set_user_id(int user_id){
+      this->user_id = user_id;
+    }
+    void set_comment(char* comment){
       deep_copy(this->comment, com, 300);
     }
     
-  //> Getters
-    char* get_Comment(){
+    //> Getters
+    int get_post_id(){
+      return this->post_id;
+    }
+    int get_user_id(){
+      return this->post_id;
+    }
+    char* get_comment(){
       return this->comment;
     }
    

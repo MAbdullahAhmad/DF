@@ -8,7 +8,7 @@
 
 using namespace std;
 
-// CRUD class
+// User class
 class User : public TokenModel{
   private:
     // CRUD Obj
@@ -90,12 +90,9 @@ class User : public TokenModel{
       return this->role;
     }
 
-   
-
     CRUD<User>* crud(){
       return this->_crud;
     }
-
 };
 
 #endif

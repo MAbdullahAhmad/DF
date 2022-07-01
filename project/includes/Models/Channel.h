@@ -7,7 +7,7 @@
 
 using namespace std;
 
-// CRUD class
+//> Channel Class
 class Channel : public TokenModel{
   private:
     // CRUD Obj
@@ -15,10 +15,10 @@ class Channel : public TokenModel{
 
     // Entity Props
     int server_id;
-    char key[50];
-    char value[50];
+    // char key[50];
+    // char value[50];
     char title[256];
-    char type[30];
+    int type;
 
   public:
     //> Constructors
@@ -31,33 +31,29 @@ class Channel : public TokenModel{
       char* ti,
       int si, // server_id
       char* title,
-      char* type
+      int type
     ):
       TokenModel(i, ti),
       server_id(si),
-      channel(type,title)
+      type(type)
     {
-        deep_copy(this->type, type, 30);
         deep_copy(this->title, title, 256);
     }
 
     //> Setters
-
     void set_title(char* title){
       deep_copy(this->title, title, 256);
     }
-    void set_type(char* type){
-      deep_copy(this->type, type, 30);
+    void set_type(int type){
+      this->type = type;
     }
 
-
     // Getters
-
-     char* get_title(){
+    char* get_title(){
       return this->title;
     }
 
-     char* get_type(){
+    int get_type(){
       return this->type;
     }
    

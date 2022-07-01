@@ -1,0 +1,67 @@
+- users
+id
+token_id
+nick
+name
+username
+password
+role (a|u)
+created_ts
+updated_ts
+
+- servers
+id
+token_id
+server_tag (base|imported|linked)
+created_ts
+updated_ts
+
+- server_config
+id
+token_id
+server_id
+key
+value
+
+- channel
+id
+token_id
+server_id
+title
+type (external|local|imported)
+created_ts
+updated_ts
+
+- post
+id
+token_id
+author_id (user)
+title
+content (text)
+created_ts
+updated_ts
+
+- post_comments
+id
+token_id
+post_id
+user_id
+comment
+created_ts
+updated_ts
+
+- reactions : seeded
+id
+label
+ascii
+created_ts
+updated_ts
+
+- post_reactions
+id
+token_id
+post_id
+user_id
+reaction_id
+created_ts
+updated_ts

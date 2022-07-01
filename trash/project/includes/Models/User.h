@@ -90,8 +90,6 @@ class User : public TokenModel{
       return this->role;
     }
 
-   
-
     CRUD<User>* crud(){
       return this->_crud;
     }

@@ -32,19 +32,14 @@ class Server : public TokenModel{
       TokenModel(i, ti, ct, ut),
       server_tag(st)
       {
-        deep_copyI(this->server_tag,si);
+        // deep_copyI(this->st)
       }
 
-    //> Setters
+     //> Setters
 
-    void set_ServerTag(char* title){
-      deep_copy(this->server_tag, si);
-    }
 
-    //> Getters
-     char* get_ServerTag(){
-      return this->server_tag;
-    }
+
+    // Getters
 
 
     CRUD<Server>* crud(){

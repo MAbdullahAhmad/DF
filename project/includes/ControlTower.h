@@ -95,12 +95,13 @@ class ControlTower{
 
     // Look Around : Match and Run Specific Route
     bool look_around(string &q){
+        
       // Do not Run Case
       if (
-        !this->active ||
-        q.length()==0
-      ) return false;
-        
+        this->active &&
+        q.length()!=0
+      )
+
       // Run
       for(Route r : this->routes)
         if(r.match(q)){
@@ -125,13 +126,13 @@ ControlTower control_tower;
 void init_routes(){
   // string start = "welcome";
   //string start = "login";
-  string start = "Signup";
+  string start = "login";
   control_tower.query(start);
 
   control_tower.add_route(new Route("welcome",      new WelcomeController()));
   control_tower.add_route(new Route("homepage",     new HomepageController()));
   control_tower.add_route(new Route("login",        new LoginController()));
-  control_tower.add_route(new Route("Signup",       new SignupController()));
+  control_tower.add_route(new Route("signup",       new SignupController()));
 
   
   while(control_tower.is_active()){

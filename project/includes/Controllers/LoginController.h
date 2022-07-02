@@ -29,10 +29,31 @@ class LoginController : public MasterController{
     }
 
     string _login(){
-      string command;
+      string username;
+      string password;
 
+      // Login Top
       this->login->run();
       this->output_manager->execute(this->login);
+      cout << "\n";
+      
+      // Input Username
+      this->output_manager->get_bm()->upload(); cout << "\n";
+      this->output_manager->get_bm()->upload();
+      cout << "\t\tEnter Username: "; username = getline();
+
+      // Input Password
+      this->output_manager->get_bm()->upload();
+      cout << "\t\tEnter Password: "; password = getline();
+      this->output_manager->get_bm()->upload(); cout << "\n\n";
+
+      // Authenticating Message
+      this->output_manager->start();
+      this->output_manager->feed();
+      this->output_manager->feed("Authenticating ...");
+      this->output_manager->end(); cout << "\n";
+      delay_seconds(2);
+
       return "";
     }
 };

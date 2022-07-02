@@ -23,11 +23,11 @@ void delay_millis(double t){
   s_for((int)(t * pow(10, 6)));
 }
 void delay_seconds(int t){
-  delay_millis(200);
-  delay_millis(200);
-  delay_millis(200);
-  delay_millis(200);
-  delay_millis(200);
+  delay_millis(100);
+  delay_millis(100);
+  delay_millis(100);
+  delay_millis(100);
+  delay_millis(100);
   if(t>0) delay_seconds(t-1);
 }
 

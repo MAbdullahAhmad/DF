@@ -67,7 +67,14 @@ class BoxManager{
     void draw_footer(){
       hf_mutual('|');
     }
-    // Empty Row
+    // Upload
+    void upload(){
+      r_start();
+    }
+    // Download
+    void download(int size){
+      r_end(box_width-size-3);
+    }
     void draw_row(){
       repeat_chr(' ', initial_spaces);
       cout << '|';
@@ -153,6 +160,10 @@ class BoxManager{
       if(over){
         draw_right(text.substr(box_width-3-inner_padding));
       }
+    }
+
+    int size(){
+      return this->box_width + this->initial_spaces;
     }
 };
 
@@ -242,6 +253,10 @@ class OutputManager{
       else if ( cmd == "__END_RIGHT__"  ){  this->right = false;   }
       else return false;
       return true;
+    }
+
+    BoxManager* get_bm(){
+      return &this->bm;
     }
 
     // void _for(int sec){

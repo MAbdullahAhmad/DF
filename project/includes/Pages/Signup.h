@@ -19,29 +19,35 @@ class Signup : public MasterPage{
     // Run Welcome Page
     void run(){
       this->header();
-      this->signup_form();
+      this->how_to();
     }
 
     //> Sections
     void header(){
-      this->in("__START__");
-      this->in("__CENTER__");
-      this->in("");
+      // Header
+      this->in("__START__"); this->in("");
+      this->in("__CENTER__"); 
       this->in("Signup");
-      //this->in("");
       this->in("__END_CENTER__");
-      this->in("__END__");
-
-
-      this->in("__START__");
-      this->in("Heading: ");
-      this->in("");
-      this->in("Paragraph here.");
       this->in("__END__");
     }
 
-    void signup_form(){
+    void how_to(){
+      // Start
+      this->in("__START__"); this->in("");
 
+      // Heading
+      this->in("Signup Form: "); this->in("");
+
+      // Para
+      this->in("    Fill up following form to create your account");
+      this->in("    You'll confirm before submission");
+      
+      this->in("__CENTER__"); this->in("");
+      this->in("__END_CENTER__");
+
+      // End
+      this->in("__END__");
     }
 };
 

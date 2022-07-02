@@ -433,6 +433,14 @@ class CRUD{
       return this->table;
     }
 
+    // Get Max ID
+    int get_max_id(){// Open
+      int id = 0;
+      for(Entity e : this->all())
+        id = e.get_id();
+      return id;
+    }
+
     // Create
     bool create(){
       // Open

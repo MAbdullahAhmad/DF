@@ -126,7 +126,7 @@ ControlTower control_tower;
 void init_routes(){
   // string start = "welcome";
   //string start = "login";
-  string start = "login";
+  string start = "homepage";
   control_tower.query(start);
 
   control_tower.add_route(new Route("welcome",      new WelcomeController()));
@@ -134,7 +134,6 @@ void init_routes(){
   control_tower.add_route(new Route("login",        new LoginController()));
   control_tower.add_route(new Route("signup",       new SignupController()));
 
-  
   while(control_tower.is_active()){
     control_tower.look_around();
   }

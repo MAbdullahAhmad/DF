@@ -19,6 +19,7 @@ class MasterModel{
     int get_current_ts(){
       return time(0);
     }
+
   public:
     //> Constructors
     MasterModel():
@@ -57,6 +58,11 @@ class MasterModel{
 
     void set_updated_ts(time_t updated_ts){
       this->updated_ts = updated_ts;
+    }
+
+    void generate_ts(){
+      this->created_ts = this->get_current_ts();
+      this->updated_ts = this->get_current_ts();
     }
 
     //> Getters
@@ -156,6 +162,11 @@ class TokenModel{
 
     void set_updated_ts(time_t updated_ts){
       this->updated_ts = updated_ts;
+    }
+
+    void generate_ts(){
+      this->created_ts = this->get_current_ts();
+      this->updated_ts = this->get_current_ts();
     }
 
     //> Getters

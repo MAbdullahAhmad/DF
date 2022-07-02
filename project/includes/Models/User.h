@@ -29,20 +29,39 @@ class User : public TokenModel{
 
     User(
       int i,
-      char* ti,
-      char* nick,
-      char* name,
-      char* username,
-      char* password,
+      const char* ti,
+      const char* nick,
+      const char* name,
+      const char* username,
+      const char* password,
       char role,
       time_t ct, time_t ut
     ):  User(){
-        deep_copy(this->nick, nick, 50);
-        deep_copy(this->name, name, 256);
-        deep_copy(this->username, username, 50);
-        deep_copy(this->password, password, 32);
-        this->role = role;
-      }
+      deep_copy(this->nick, nick, 50);
+      deep_copy(this->name, name, 256);
+      deep_copy(this->username, username, 50);
+      deep_copy(this->password, password, 32);
+      this->role = role;
+    }
+    User(
+      const char* nick,
+      const char* name,
+      const char* username,
+      const char* password,
+      char role
+    ): User() {
+      // Generate ID and TS
+      this->generate_id();
+      this->generate_ts();
+
+      // Set Props
+      deep_copy(this->nick, nick, 50);
+      deep_copy(this->name, name, 256);
+      deep_copy(this->username, username, 50);
+      deep_copy(this->password, password, 32);
+
+      this->role = role;
+    }
 
     bool create(){
       return _crud->create();
@@ -67,6 +86,10 @@ class User : public TokenModel{
 
     void set_role(char role){
       this->role = role;
+    }
+
+    void generate_id(){
+      this->id = this->crud()->get_max_id() + 1;
     }
 
     // Getters

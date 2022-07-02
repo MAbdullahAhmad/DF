@@ -12,6 +12,7 @@ string get_command(){
 }
 
 bool is_command(string inp_command, string command, bool strict){
+  str_to_lower(inp_command); str_to_lower(command);
   return (
     inp_command == command
   ) || (
@@ -27,6 +28,7 @@ bool is_command(string inp_command, string command){
 // In Full String Commands
 bool in_commands(string cmd, vector<string> commands, bool strict){
   for(string _cmd : commands){
+    str_to_lower(cmd); str_to_lower(_cmd);
     if(is_command(cmd, _cmd, strict))
       return true;
   }
@@ -39,6 +41,7 @@ bool in_commands(string cmd, vector<string> commands){
 // In One Character Commands
 bool in_ch_commands(string cmd, vector<string> commands, bool strict){
   for(string _cmd : commands){
+    str_to_lower(cmd); str_to_lower(_cmd);
     if(is_command(cmd, _cmd.substr(0, 1), strict))
       return true;
   }

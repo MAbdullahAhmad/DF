@@ -4,9 +4,10 @@
 #include "iostream"
 #include "cstring"
 #include "../../libs/char_array.h"
-#include "../Session.h"
 #include "../CRUD.h"
+#include "../Session.h"
 #include "../MasterModel.h"
+#include "../MasterPage.h"
 
 using namespace std;
 using namespace SessionSpace;
@@ -120,7 +121,9 @@ class User : public TokenModel{
       return this->_crud;
     }
 
-    // Extras
+    //> Extras
+
+    // Verify User
     int verify(
       string &username,
       string &password,
@@ -145,6 +148,23 @@ class User : public TokenModel{
       string &password
     ){
       return this->verify(username, password, true);
+    }
+
+    // Display User
+    void display(MasterPage* page){
+      page->in("");
+      page->in("User-" + str(this->id) + ":");
+      page->in("");
+      page->in("     ID : " + str(this->id));
+      page->in("     Token-ID : " + str(this->token_id));
+      page->in("     Nick : " + str(this->nick));
+      page->in("     Name : " + str(this->name));
+      page->in("     Username : " + str(this->username));
+      page->in("     Password : " + str(this->password));
+      page->in("     Timestamps : [Created: " + str(this->created_ts) + "] [Updated: " + str(this->updated_ts) + "]");
+      page->in("     Role : " + str(this->role ? "User" : "Admin"));
+      page->in("");
+      page->in("__END__");
     }
 };
 

@@ -2,33 +2,24 @@
 #define DATABASE_SEEDER_H
 
 #include "iostream"
+#include "vector"
 #include "../Models/User.h"
 
 using namespace std;
 
-class AdminSeeder{
-  private:
-    static vector<User*> admins;
-  
-  public:
-    static void run(){
-      AdminSeeder::load();
-      for(User* a : AdminSeeder::admins)
-        a->create();
-    }
+void admins(){
+  vector<User> admin_users;
+  User u(
+    "admin",
+    "Admin",
+    "admin",
+    "admin",
+    'a'
+  ); u.generate_id(); u.generate_ts();
+  admin_users.push_back(u);
 
-    static void load(){
-      admins.push_back(new User(
-        "admin",
-        "Admin",
-        "admin",
-        "admin",
-        'a'
-      ));
-    }
-};
-
-// Static Init
-vector<User*> AdminSeeder::admins;
+  for(User a : admin_users)
+    a.create();
+}
 
 #endif

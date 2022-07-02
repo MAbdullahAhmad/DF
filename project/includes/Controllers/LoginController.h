@@ -64,8 +64,8 @@ class LoginController : public MasterController{
       for(User t : u->crud()->all())
         if(l = t.verify(username, password)){
           session->put("_auth_login", to_string(l));
+          break;
         }
-
 
       if(l == 0){
         // Confirm
@@ -92,6 +92,7 @@ class LoginController : public MasterController{
         }
       }
 
+      cout << (session->get("_auth_login") == "1" ? "main_form" : "admin_panel") << "\n"; //@debug
       return session->get("_auth_login") == "1" ? "main_form" : "admin_panel";
     }
 };

@@ -438,6 +438,7 @@ class CRUD{
       int id = 0;
       for(Entity e : this->all())
         id = e.get_id();
+      
       return id;
     }
 

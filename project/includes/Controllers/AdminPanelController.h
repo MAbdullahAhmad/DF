@@ -35,6 +35,7 @@ class AdminPanelController : public MasterController{
       string cmd;
 
       // Execute Page
+      
       this->output_manager->execute(this->admin_panel);
 
       // Command Handeling
@@ -42,7 +43,7 @@ class AdminPanelController : public MasterController{
       cmd = get_command();
       if ( // Cancel
         is_command(cmd, "U")
-      ) return "admin_Users";
+      ) return "admin_users";
       else if ( // Retry
         is_command(cmd, "C")
       ) return "admin_channels";

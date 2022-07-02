@@ -2,9 +2,18 @@
 #define STRING_H
 
 #include "iostream"
+#include "sstream"
+#include "string.h"
 #include "foreach.h"
 
 using namespace std;
+
+template<class T>
+string str(T i){
+  stringstream s;
+  s << i;
+  return s.str();
+}
 
 void repeat_str(string s, int count){
   for(int i=0; i<count; i++){

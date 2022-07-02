@@ -6,8 +6,8 @@ using namespace SessionSpace;
 
 // Session Object
 int main(){
-  // Seed Admin
-  AdminSeeder::run();
+  // Seed Admins
+  admins();
 
   // Return
   return 0;

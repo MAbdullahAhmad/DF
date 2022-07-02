@@ -8,6 +8,7 @@
 using namespace std;
 using namespace SessionSpace;
 
+//> AdminPanel Class
 class AdminPanel : public MasterPage{
   private:
 

@@ -7,6 +7,8 @@
 
 #include "Controllers/WelcomeController.h"
 #include "Controllers/HomepageController.h"
+#include "Controllers/LoginController.h"
+#include "Controllers/SignupController.h"
 
 struct Route{
   // Props
@@ -122,11 +124,15 @@ ControlTower control_tower;
 
 void init_routes(){
   // string start = "welcome";
-  string start = "homepage";
+  //string start = "login";
+  string start = "Signup";
   control_tower.query(start);
 
   control_tower.add_route(new Route("welcome",      new WelcomeController()));
   control_tower.add_route(new Route("homepage",     new HomepageController()));
+  control_tower.add_route(new Route("login",        new LoginController()));
+  control_tower.add_route(new Route("Signup",       new SignupController()));
+
   
   while(control_tower.is_active()){
     control_tower.look_around();

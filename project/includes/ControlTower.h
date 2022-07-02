@@ -6,11 +6,26 @@
 #include "MasterController.h"
 using namespace std;
 
+// Guest Controllers
 #include "Controllers/WelcomeController.h"
 #include "Controllers/HomepageController.h"
 #include "Controllers/LoginController.h"
 #include "Controllers/SignupController.h"
+
+// User Controllers
 #include "Controllers/MainFormController.h"
+#include "Controllers/ChannelsController.h"
+#include "Controllers/NewPostController.h"
+#include "Controllers/ViewPostController.h"
+
+// Admin Controllers
+#include "Controllers/AdminPanelController.h"
+#include "Controllers/AdminUsersController.h"
+#include "Controllers/AdminChannelsController.h"
+#include "Controllers/AdminAdminsController.h"
+
+// Logout Controller
+#include "Controllers/LogoutController.h"
 
 struct Route{
   // Props
@@ -131,11 +146,19 @@ void init_routes(){
   string start = "homepage";
   control_tower.query(start);
 
-  control_tower.add_route(new Route("welcome",      new WelcomeController()));
-  control_tower.add_route(new Route("homepage",     new HomepageController()));
-  control_tower.add_route(new Route("login",        new LoginController()));
-  control_tower.add_route(new Route("signup",       new SignupController()));
-  control_tower.add_route(new Route("main_form",    new MainFormController()));
+  control_tower.add_route(new Route("welcome",           new WelcomeController()));
+  control_tower.add_route(new Route("homepage",          new HomepageController()));
+  control_tower.add_route(new Route("login",             new LoginController()));
+  control_tower.add_route(new Route("signup",            new SignupController()));
+  control_tower.add_route(new Route("main_form",         new MainFormController()));
+  control_tower.add_route(new Route("channels",          new ChannelsController()));
+  control_tower.add_route(new Route("new_post",          new NewPostController()));
+  control_tower.add_route(new Route("view_post",         new ViewPostController()));
+  control_tower.add_route(new Route("admin_panel",       new AdminPanelController()));
+  control_tower.add_route(new Route("admin_users",       new AdminUsersController()));
+  control_tower.add_route(new Route("admin_channels",    new AdminChannelsController()));
+  control_tower.add_route(new Route("admin_admins",      new AdminAdminsController()));
+  control_tower.add_route(new Route("logout",            new LogoutController()));
 
   while(control_tower.is_active()){
     control_tower.look_around();

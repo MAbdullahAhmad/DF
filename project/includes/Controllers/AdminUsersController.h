@@ -1,35 +1,35 @@
-#ifndef CONTROLLER_MAIN_FORM_H
-#define CONTROLLER_MAIN_FORM_H
+#ifndef CONTROLLER_ADMIN_USERS_H
+#define CONTROLLER_ADMIN_USERS_H
 
 #include "iostream"
 #include "../MasterController.h"
 #include "../OutputManager.h"
-#include "../Pages/MainForm.h"
+#include "../Pages/AdminUsers.h"
 #include "../Models/User.h"
 
 using namespace std;
 
 //> WelcomeController class
-class MainFormController : public MasterController{
+class AdminUsersController : public MasterController{
   private:
     OutputManager* output_manager;
-    MainForm* main_form;
+    AdminUsers* admin_users;
 
   public:
-    MainFormController(){
+    AdminUsersController(){
       output_manager  = nullptr;
-      main_form          = nullptr;
+      admin_users          = nullptr;
     }
 
     string fire(){
       this->output_manager = new OutputManager();
-      this->main_form = new MainForm(false);
+      this->admin_users = new AdminUsers(false);
 
-      return _main_form();
+      return _admin_users();
       return "exit";
     }
 
-    string _main_form(){
+    string _admin_users(){
       string cmd;
       return "";
     }

@@ -1,35 +1,35 @@
-#ifndef CONTROLLER_MAIN_FORM_H
-#define CONTROLLER_MAIN_FORM_H
+#ifndef CONTROLLER_CHANNELS_H
+#define CONTROLLER_CHANNELS_H
 
 #include "iostream"
 #include "../MasterController.h"
 #include "../OutputManager.h"
-#include "../Pages/MainForm.h"
+#include "../Pages/Channels.h"
 #include "../Models/User.h"
 
 using namespace std;
 
 //> WelcomeController class
-class MainFormController : public MasterController{
+class ChannelsController : public MasterController{
   private:
     OutputManager* output_manager;
-    MainForm* main_form;
+    Channels* channels;
 
   public:
-    MainFormController(){
+    ChannelsController(){
       output_manager  = nullptr;
-      main_form          = nullptr;
+      channels          = nullptr;
     }
 
     string fire(){
       this->output_manager = new OutputManager();
-      this->main_form = new MainForm(false);
+      this->channels = new Channels(false);
 
-      return _main_form();
+      return _channels();
       return "exit";
     }
 
-    string _main_form(){
+    string _channels(){
       string cmd;
       return "";
     }

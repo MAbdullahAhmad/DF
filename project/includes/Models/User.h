@@ -2,7 +2,9 @@
 #define MODEL_USER_H
 
 #include "iostream"
+#include "cstring"
 #include "../../libs/char_array.h"
+#include "../Session.h"
 #include "../CRUD.h"
 #include "../MasterModel.h"
 
@@ -124,10 +126,12 @@ class User : public TokenModel{
       string password,
       bool put
     ){
+      cout << "Before CMP\n"; //@debug
       if(
         (strcmp(username.c_str(), this->username) == 0) &&
         (strcmp(password.c_str(), this->password) == 0)
       ) {
+        cout << "After CMP\n"; //@debug
         if(put){
           session->put("_auth_user", this->username);
           session->put("_auth_name", this->name);

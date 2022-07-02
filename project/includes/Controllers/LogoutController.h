@@ -1,35 +1,32 @@
-#ifndef CONTROLLER_MAIN_FORM_H
-#define CONTROLLER_MAIN_FORM_H
+#ifndef CONTROLLER_LOGOUT_H
+#define CONTROLLER_LOGOUT_H
 
 #include "iostream"
 #include "../MasterController.h"
 #include "../OutputManager.h"
-#include "../Pages/MainForm.h"
 #include "../Models/User.h"
 
 using namespace std;
 
 //> WelcomeController class
-class MainFormController : public MasterController{
+class LogoutController : public MasterController{
   private:
     OutputManager* output_manager;
-    MainForm* main_form;
 
   public:
-    MainFormController(){
+    LogoutController(){
       output_manager  = nullptr;
-      main_form          = nullptr;
+      logout          = nullptr;
     }
 
     string fire(){
       this->output_manager = new OutputManager();
-      this->main_form = new MainForm(false);
 
-      return _main_form();
+      return _logout();
       return "exit";
     }
 
-    string _main_form(){
+    string _logout(){
       string cmd;
       return "";
     }

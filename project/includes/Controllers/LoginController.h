@@ -61,8 +61,11 @@ class LoginController : public MasterController{
       int l;
       User* u = new User;
       for(User t : u->crud()->all())
-        if(l = t.verify(username, password))
+        if(l = t.verify(username, password)){
+          cout << "Verif\n"; // @debug
           session->put("_auth_login", to_string(l));
+        }
+
 
       if(!(bool)l){
         // Confirm
@@ -89,7 +92,7 @@ class LoginController : public MasterController{
         }
       }
 
-      return "main_form";
+      return session->get("_auth_login") == "1" ? "main_form" : "admin_portal";
     }
 };
 

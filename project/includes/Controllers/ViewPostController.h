@@ -1,35 +1,35 @@
-#ifndef CONTROLLER_MAIN_FORM_H
-#define CONTROLLER_MAIN_FORM_H
+#ifndef CONTROLLER_VIEW_POST_H
+#define CONTROLLER_VIEW_POST_H
 
 #include "iostream"
 #include "../MasterController.h"
 #include "../OutputManager.h"
-#include "../Pages/MainForm.h"
+#include "../Pages/ViewPost.h"
 #include "../Models/User.h"
 
 using namespace std;
 
 //> WelcomeController class
-class MainFormController : public MasterController{
+class ViewPostController : public MasterController{
   private:
     OutputManager* output_manager;
-    MainForm* main_form;
+    ViewPost* view_post;
 
   public:
-    MainFormController(){
+    ViewPostController(){
       output_manager  = nullptr;
-      main_form          = nullptr;
+      view_post          = nullptr;
     }
 
     string fire(){
       this->output_manager = new OutputManager();
-      this->main_form = new MainForm(false);
+      this->view_post = new ViewPost(false);
 
-      return _main_form();
+      return _view_post();
       return "exit";
     }
 
-    string _main_form(){
+    string _view_post(){
       string cmd;
       return "";
     }

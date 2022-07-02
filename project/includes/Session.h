@@ -60,5 +60,9 @@ namespace SessionSpace {
   };
 
   Session* session;
+
+  bool auth(){
+    return session->get("_auth_login") != "0";
+  }
 }
 #endif

@@ -122,16 +122,14 @@ class User : public TokenModel{
 
     // Extras
     int verify(
-      string username,
-      string password,
+      string &username,
+      string &password,
       bool put
     ){
-      cout << "Before CMP\n"; //@debug
       if(
         (strcmp(username.c_str(), this->username) == 0) &&
         (strcmp(password.c_str(), this->password) == 0)
       ) {
-        cout << "After CMP\n"; //@debug
         if(put){
           session->put("_auth_user", this->username);
           session->put("_auth_name", this->name);
@@ -143,10 +141,10 @@ class User : public TokenModel{
       return 0;
     }
     int verify(
-      string username,
-      string password
+      string &username,
+      string &password
     ){
-      return this->verify(username, password);
+      return this->verify(username, password, true);
     }
 };
 

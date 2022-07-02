@@ -3,6 +3,7 @@
 
 #include "iostream"
 #include "cstring"
+#include "../Session.h"
 #include "../MasterController.h"
 #include "../OutputManager.h"
 #include "../Pages/Login.h"
@@ -58,16 +59,15 @@ class LoginController : public MasterController{
       this->output_manager->end(); cout << "\n";
       // delay_seconds(2); //@debug
 
-      int l;
+      int l=0;
       User* u = new User;
       for(User t : u->crud()->all())
         if(l = t.verify(username, password)){
-          cout << "Verif\n"; // @debug
           session->put("_auth_login", to_string(l));
         }
 
 
-      if(!(bool)l){
+      if(l == 0){
         // Confirm
         LoginFailed:
         this->output_manager->start();
@@ -92,7 +92,7 @@ class LoginController : public MasterController{
         }
       }
 
-      return session->get("_auth_login") == "1" ? "main_form" : "admin_portal";
+      return session->get("_auth_login") == "1" ? "main_form" : "admin_panel";
     }
 };
 

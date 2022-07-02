@@ -1,5 +1,5 @@
-#ifndef WELCOME_PAGE_H
-#define WELCOME_PAGE_H
+#ifndef HOMEPAGE_PAGE_H
+#define HOMEPAGE_PAGE_H
 
 #include "iostream"
 #include "../MasterPage.h"

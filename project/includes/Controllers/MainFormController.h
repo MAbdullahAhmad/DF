@@ -1,35 +1,35 @@
-#ifndef CONTROLLER_SIGNUP_H
-#define CONTROLLER_SIGNUP_H
+#ifndef CONTROLLER_MAIN_FORM_H
+#define CONTROLLER_MAIN_FORM_H
 
 #include "iostream"
 #include "../MasterController.h"
 #include "../OutputManager.h"
-#include "../Pages/Signup.h"
+#include "../Pages/MainForm.h"
 #include "../Models/User.h"
 
 using namespace std;
 
 //> WelcomeController class
-class SignupController : public MasterController{
+class MainFormController : public MasterController{
   private:
     OutputManager* output_manager;
-    Signup* signup;
+    MainForm* main_form;
 
   public:
-    SignupController(){
+    MainFormController(){
       output_manager  = nullptr;
-      signup          = nullptr;
+      main_form          = nullptr;
     }
 
     string fire(){
       this->output_manager = new OutputManager();
-      this->signup = new Signup(false);
+      this->main_form = new MainForm(false);
 
-      return _signup();
+      return _main_form();
       return "exit";
     }
 
-    string _signup(){
+    string _main_form(){
       string cmd;
 
       // Props
@@ -38,9 +38,9 @@ class SignupController : public MasterController{
       string username;
       string password;
 
-      // Signup Top
-      this->signup->run();
-      this->output_manager->execute(this->signup);
+      // MainForm Top
+      this->main_form->run();
+      this->output_manager->execute(this->main_form);
       cout << "\n";
       
       // Input Username
@@ -78,7 +78,7 @@ class SignupController : public MasterController{
       ) return "homepage";
       else if ( // Retry
         is_command(cmd, "R")
-      ) return "signup";
+      ) return "main_form";
       else if ( // Yes
         is_command(cmd, "Y")
       ) true;
@@ -94,7 +94,7 @@ class SignupController : public MasterController{
       this->output_manager->end(); cout << "\n";
       delay_seconds(1);
 
-      // Signup Operation
+      // MainForm Operation
       User * user;
       user = new User(
         nick.c_str(),

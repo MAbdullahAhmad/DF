@@ -2,11 +2,14 @@
 #define CONTROLLER_LOGIN_H
 
 #include "iostream"
+#include "cstring"
 #include "../MasterController.h"
 #include "../OutputManager.h"
 #include "../Pages/Login.h"
+#include "../Models/User.h"
 
 using namespace std;
+using namespace SessionSpace;
 
 //> WelcomeController class
 class LoginController : public MasterController{
@@ -29,6 +32,7 @@ class LoginController : public MasterController{
     }
 
     string _login(){
+      string cmd;
       string username;
       string password;
 
@@ -52,9 +56,40 @@ class LoginController : public MasterController{
       this->output_manager->feed();
       this->output_manager->feed("Authenticating ...");
       this->output_manager->end(); cout << "\n";
-      delay_seconds(2);
+      // delay_seconds(2); //@debug
 
-      return "";
+      int l;
+      User* u = new User;
+      for(User t : u->crud()->all())
+        if(l = t.verify(username, password))
+          session->put("_auth_login", to_string(l));
+
+      if(!(bool)l){
+        // Confirm
+        LoginFailed:
+        this->output_manager->start();
+        this->output_manager->feed();
+        this->output_manager->feed("Incorrect Username or Password.");
+        this->output_manager->command("__RIGHT__");
+        this->output_manager->feed("[R] Retry  [B] Back to Homepage");
+        this->output_manager->command("__END_RIGHT__");
+        this->output_manager->end(); cout << "\n";
+
+        // Command Handeling
+        cmd = get_command();
+        if ( // Cancel
+          is_command(cmd, "R")
+        ) return "login";
+        else if ( // Retry
+          is_command(cmd, "B")
+        ) return "homepage";
+        else { // Invalid
+          cout << "\nInvalid Choice! Retry..\n";
+          goto LoginFailed;
+        }
+      }
+
+      return "main_form";
     }
 };
 

@@ -7,6 +7,7 @@
 #include "../MasterModel.h"
 
 using namespace std;
+using namespace SessionSpace;
 
 // User class
 class User : public TokenModel{
@@ -115,6 +116,33 @@ class User : public TokenModel{
 
     CRUD<User>* crud(){
       return this->_crud;
+    }
+
+    // Extras
+    int verify(
+      string username,
+      string password,
+      bool put
+    ){
+      if(
+        (strcmp(username.c_str(), this->username) == 0) &&
+        (strcmp(password.c_str(), this->password) == 0)
+      ) {
+        if(put){
+          session->put("_auth_user", this->username);
+          session->put("_auth_name", this->name);
+          session->put("_auth_nick", this->nick);
+          session->put("_auth_role", this->role == 'a' ? "a" : "u");
+        }
+        return this->role == 'a' ? 2 : 1;
+      }
+      return 0;
+    }
+    int verify(
+      string username,
+      string password
+    ){
+      return this->verify(username, password);
     }
 };
 

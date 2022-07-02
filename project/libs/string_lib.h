@@ -2,6 +2,7 @@
 #define STRING_H
 
 #include "iostream"
+#include "vector"
 using namespace std;
 
 void repeat_str(string s, int count){

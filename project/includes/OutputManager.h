@@ -125,7 +125,33 @@ class BoxManager{
 
       // Over
       if(over){
-        draw_row(text.substr(box_width-3-inner_padding));
+        draw_center(text.substr(box_width-3-inner_padding));
+      }
+    }
+    // Right Aligned Content
+    void draw_right(string text){
+      bool over = false; // flag for overflow
+
+      int sp = box_width - inner_padding * 2 - text.length();
+
+      // Start
+      r_start();
+
+      // Content with Overflow Handeling
+      cout << get_repeat_chr(' ', sp);
+      if(text.length() > box_width-3-inner_padding){
+        cout << text.substr(0, box_width-3-inner_padding) << "   ";
+        over = true;
+      } else {
+        cout << text;
+      }
+
+      // End
+      r_end(3);
+
+      // Over
+      if(over){
+        draw_right(text.substr(box_width-3-inner_padding));
       }
     }
 };
@@ -136,6 +162,7 @@ class OutputManager{
     // Menu m;
     BoxManager bm;
     bool center = false;
+    bool right = false;
 
   protected:
   
@@ -182,8 +209,9 @@ class OutputManager{
       bm.draw_row();
     }
     void feed(string dat){
-      if (center)  bm.draw_center(dat);
-      else         bm.draw_row(dat);
+      if (center)       bm.draw_center(dat);
+      else if (right)   bm.draw_right(dat);
+      else              bm.draw_row(dat);
     }
     void end(){
       bm.draw_footer();
@@ -210,6 +238,8 @@ class OutputManager{
       else if ( cmd == "__END__"        ){  this->end();           }
       else if ( cmd == "__CENTER__"     ){  this->center = true;   }
       else if ( cmd == "__END_CENTER__" ){  this->center = false;  }
+      else if ( cmd == "__RIGHT__"      ){  this->right = true;    }
+      else if ( cmd == "__END_RIGHT__"  ){  this->right = false;   }
       else return false;
       return true;
     }

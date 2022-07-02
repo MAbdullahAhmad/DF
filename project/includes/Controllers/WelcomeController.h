@@ -3,21 +3,28 @@
 
 #include "iostream"
 #include "../MasterController.h"
+#include "../OutputManager.h"
 
 using namespace std;
 
 //> WelcomeController class
 class WelcomeController : public MasterController{
   private:
+    OutputManager* output_manager;
 
   public:
     WelcomeController(){
-      cout << "WelcomeController\n";
+      output_manager = nullptr;
     }
 
     string fire(){
-      cout << "Fire WC\n";
-      return "welcome";
+      output_manager = new OutputManager;
+      welcome_animation();
+      return "homepage";
+    }
+
+    void welcome_animation(){
+      this->output_manager->welcome();
     }
 };
 

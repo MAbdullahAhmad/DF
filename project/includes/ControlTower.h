@@ -6,7 +6,7 @@
 #include "MasterController.h"
 
 #include "Controllers/WelcomeController.h"
-
+#include "Controllers/HomepageController.h"
 
 struct Route{
   // Props
@@ -39,7 +39,7 @@ class ControlTower{
     // Props
     vector<Route> routes;
     string qry = "";
-    bool fired = false;
+    bool active = true;
 
   public:
     //> Constructors
@@ -50,9 +50,20 @@ class ControlTower{
       routes(routes){}
 
     // Set Query
-    void query(string q){
+    void query(string q, bool active){
       this->qry = q;
-      this->fired = false;
+      this->active = active;
+    }
+    void query(string q){
+      this->query(q, true);
+    }
+    // Set Activity
+    void activity(bool active){
+      this->active = active;
+    }
+    // Is Active
+    bool is_active(){
+      return this->active;
     }
 
     // Add Route
@@ -84,20 +95,21 @@ class ControlTower{
     bool look_around(string &q){
       // Do not Run Case
       if (
-        this->fired ||
+        !this->active ||
         q.length()==0
       ) return false;
         
       // Run
       for(Route r : this->routes)
         if(r.match(q)){
-          this->fired = true;
           q = "";
           this->qry = r.fire();
+
           return true;
         }
 
       // 404
+      this->active = false;
       return false;
     }
     bool look_around(){
@@ -109,7 +121,16 @@ class ControlTower{
 ControlTower control_tower;
 
 void init_routes(){
+  // string start = "welcome";
+  string start = "homepage";
+  control_tower.query(start);
+
   control_tower.add_route(new Route("welcome",      new WelcomeController()));
+  control_tower.add_route(new Route("homepage",     new HomepageController()));
+  
+  while(control_tower.is_active()){
+    control_tower.look_around();
+  }
 }
 
 using namespace std;

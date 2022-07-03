@@ -33,6 +33,7 @@ class LoginController : public MasterController{
     }
 
     string _login(){
+      session = new Session;
       string cmd;
       string username;
       string password;
@@ -63,9 +64,10 @@ class LoginController : public MasterController{
       User* u = new User;
       for(User t : u->crud()->all())
         if(l = t.verify(username, password)){
+          cout << "";
           session->put("_auth_login", to_string(l));
           break;
-        }
+        } else cout << "";
 
       if(l == 0){
         // Confirm

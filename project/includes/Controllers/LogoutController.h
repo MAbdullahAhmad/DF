@@ -31,6 +31,7 @@ class LogoutController : public MasterController{
       string cmd;
 
       session->put("_auth_login", "0");
+      session = new Session;
 
       // Confirm
       LogoutUser:

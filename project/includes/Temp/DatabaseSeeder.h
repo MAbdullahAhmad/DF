@@ -25,7 +25,7 @@ void admins(){
 }
 
 void servers(){
-  vector<Server> servers;
+  vector<Server> _servers;
   // char tag[32] = "";
   string tag = "1234";
   char tmp[32];
@@ -37,28 +37,9 @@ void servers(){
     1656803922, 1656803922
   );
 
-  servers.push_back(s);
+  _servers.push_back(s);
 
-  for(Server s : servers)
-    s.create();
-}
-
-void posts(){
-  vector<Post> posts;
-  // char tag[32] = "";
-  string tag = "1234";
-  char tmp[32];
-  strcpy(tmp, tag.c_str());
-  Server s(
-    1,
-    tmp,
-    1,
-    1656803922, 1656803922
-  );
-
-  servers.push_back(s);
-
-  for(Server s : servers)
+  for(Server s : _servers)
     s.create();
 }
 

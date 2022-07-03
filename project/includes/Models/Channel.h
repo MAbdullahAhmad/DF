@@ -3,6 +3,7 @@
 
 #include "iostream"
 #include "../CRUD.h"
+#include "../MasterPage.h"
 #include "../MasterModel.h"
 #include "Server.h"
 

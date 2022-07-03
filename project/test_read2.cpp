@@ -2,23 +2,19 @@
 #include "vector"
 
 // Pages
-#include "includes/OutputManager.h"
-#include "includes/Models/User.h"
-#include "includes/Pages/AdminUsers.h"
+#include "includes/Models/Post.h"
 
 using namespace std;
 
 int main(){
-  OutputManager om;
-  User u;
-  AdminUsers au(false);
+  Post u;
   
   cout << "\n\n";
-  for(User uu: u.crud()->all()){
-    uu.display(&au);
+  for(Post p: u.crud()->all()){
+    cout << p.get_id() << '\n';
+    cout << p.get_author_id() << '\n';
+    cout << p.get_channel_id() << '\n' << '\n';
   }
-
-  om.execute(&au);
 
   return 0;
 }

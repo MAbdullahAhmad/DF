@@ -74,6 +74,7 @@ class Channels : public MasterPage{
       this->in("---------");
       this->in("Posts are as follow:");
       this->in("__END__");
+      cout << posts.size() << '\n';
       for(Post p : posts){
         if(p.get_channel_id() == channel_id){
           p.row_display(this);

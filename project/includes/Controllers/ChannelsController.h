@@ -7,6 +7,7 @@
 #include "../OutputManager.h"
 #include "../Pages/Channels.h"
 #include "../Models/Channel.h"
+#include "../Models/Post.h"
 #include "../Session.h"
 
 using namespace std;
@@ -46,7 +47,7 @@ class ChannelsController : public MasterController{
 
       this->channels->landing(channel->get_title());
       this->channels->create_post();
-      this->channels->display_posts(this->crud->all(), stoi(session->get("channel_id")));
+      this->channels->display_posts((new Post)->crud()->all(), stoi(session->get("channel_id")));
       this->channels->select_post();
       this->channels->footer();
       this->output_manager->execute(this->channels);
@@ -62,7 +63,7 @@ class ChannelsController : public MasterController{
       ) return "logout";
       else if ( // Retry
         is_command(cmd, "C")
-      ) return "create_post";
+      ) return "new_post";
       else if ( // Cancel
         is_command(cmd, "B")
       ) return "main_form";
@@ -106,8 +107,8 @@ class ChannelsController : public MasterController{
       ) return "logout";
       
       // Selection Operation
-      Post* p = crud->read(stoi(cmd));
-      if(p){
+      Post* p = (new Post)->crud()->read(stoi(cmd));
+      if((bool)p &&  p->get_channel_id() == stoi(session->get("channel_id"))){
         session->put("post_id", str(p->get_id()));
       } else {
         this->output_manager->get_bm()->upload();

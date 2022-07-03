@@ -134,6 +134,7 @@ class User : public TokenModel{
         (strcmp(password.c_str(), this->password) == 0)
       ) {
         if(put){
+          session->put("_auth_id", str(this->id));
           session->put("_auth_user", this->username);
           session->put("_auth_name", this->name);
           session->put("_auth_nick", this->nick);

@@ -4,6 +4,7 @@
 #include "iostream"
 #include "../CRUD.h"
 #include "../MasterModel.h"
+#include "../Models/Channel.h"
 
 using namespace std;
 
@@ -18,7 +19,6 @@ class Post : public TokenModel{
     int author_id;
     char title[256];
     char content[20000];
-    int type;
 
   public:
     //> Constructors
@@ -33,19 +33,38 @@ class Post : public TokenModel{
       int author_id,
       char* title,
       char* content,
-      int type,
       time_t ct, time_t ut
     ):
       TokenModel(i, ti, ct, ut),
       channel_id(channel_id),
       author_id(author_id),
-      type(type)
+      _crud(new CRUD<Post>(this, "Posts"))
     {
       deep_copy(this->title, title, 256);
       deep_copy(this->content, content, 20000);
     }
 
+    Post(
+      int channel_id,
+      int author_id,
+      const char* title,
+      const char* content
+    ):
+      channel_id(channel_id),
+      author_id(author_id),
+      _crud(new CRUD<Post>(this, "Posts"))
+    {
+      this->generate_id();
+      this->generate_ts();
+      deep_copy(this->title, title, 256);
+      deep_copy(this->content, content, 20000);
+    }
+
     //> Setters
+
+    bool create(){
+      return _crud->create();
+    }
 
     void set_channel_id(int channel_id){
       this->channel_id = channel_id;
@@ -56,10 +75,12 @@ class Post : public TokenModel{
     void set_content(char *content){
       deep_copy(this->content, content, 20000);
     }
-    void set_type(int type){
-      this->type = type;
-    }
 
+    // ID Generator
+    void generate_id(){
+      this->id = this->crud()->get_max_id() + 1;
+    }
+    
     //> Getters
 
     int get_channel_id(){
@@ -70,9 +91,6 @@ class Post : public TokenModel{
     }
     char* get_content(){
       return this->content;
-    }
-    int get_type(){
-      return this->type;
     }
    
     CRUD<Post>* crud(){
@@ -85,6 +103,12 @@ class Post : public TokenModel{
       c->set_id(this->channel_id);
       c = c->crud()->read();
       return c;
+    }
+    User* author(){
+      User* u = new User();
+      u->set_id(this->author_id);
+      u = u->crud()->read();
+      return u;
     }
 
     // Extras
@@ -106,7 +130,7 @@ class Post : public TokenModel{
     // Row Display Channel
     void row_display(MasterPage* page){
       page->in("");
-      page->in("  [ID : " + str(this->id) + ", Channel: " + str(this->channel_id) + " (" + this->channel()->get_title() + "), Post Title: " + this->title + "]");
+      page->in("  [ID : " + str(this->id) + ", Channel: " + this->channel()->get_title() + ", Author: " + this->author()->get_name() + ", Post Title: " + this->title + "]");
       page->in("__END__");
     }
 };

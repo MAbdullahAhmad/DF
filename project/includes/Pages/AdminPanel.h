@@ -91,8 +91,7 @@ class AdminPanel : public MasterPage{
       this->in("--------"); this->in("");
       
       this->in("[U] Manage Users");
-      this->in("[C] Manage Channels");
-      this->in("[A] Manage Admins"); this->in("");
+      this->in("[C] Manage Channels"); this->in("");
 
       // End
       this->in("__END__");

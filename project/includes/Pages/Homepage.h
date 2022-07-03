@@ -81,7 +81,6 @@ class Homepage : public MasterPage{
       // Right Content
       this->in("__RIGHT__");
       this->in("[A] About Us  ");
-      this->in("[C] Contact Us");
       this->in("__END_RIGHT__");
       
       // Left Content

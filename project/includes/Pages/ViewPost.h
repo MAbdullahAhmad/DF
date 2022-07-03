@@ -3,6 +3,7 @@
 
 #include "iostream"
 #include "../MasterPage.h"
+#include "../Models/PostComment.h"
 
 class ViewPost : public MasterPage{
   private:
@@ -66,6 +67,26 @@ class ViewPost : public MasterPage{
 
       // End
       this->in("__END__");
+    }
+
+    // Post Comments
+    void post_comments(vector<PostComment> comments, int post_id){
+      this->in("__START__");
+      this->in("");
+      this->in("Post Comments");
+      this->in("---------");
+      this->in("__RIGHT__");
+      this->in("[C] Comment");
+      this->in("__END_RIGHT__");
+      this->in("Comments Are as Follow:");
+      this->in("");
+      this->in("__END__");
+      cout << comments.size() << '\n';
+      for(PostComment pc : comments){
+        if(pc.get_post_id() == post_id){
+          pc.display(this);
+        }
+      }
     }
 };
 

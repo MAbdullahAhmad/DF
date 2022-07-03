@@ -26,6 +26,12 @@ namespace SessionSpace {
       }
 
       void put(string key, string value){
+        for(StringPair sp : meta){
+          if(sp.key == key){
+            sp.value = value;
+            return;
+          }
+        }
         StringPair pair(key, value);
         meta.push_back(pair);
       }

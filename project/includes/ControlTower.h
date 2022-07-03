@@ -9,6 +9,7 @@ using namespace std;
 // Guest Controllers
 #include "Controllers/WelcomeController.h"
 #include "Controllers/HomepageController.h"
+#include "Controllers/AboutController.h"
 #include "Controllers/LoginController.h"
 #include "Controllers/SignupController.h"
 
@@ -149,6 +150,7 @@ void init_routes(){
 
   control_tower.add_route(new Route("welcome",               new WelcomeController()));
   control_tower.add_route(new Route("homepage",              new HomepageController()));
+  control_tower.add_route(new Route("about",                 new AboutController()));
   control_tower.add_route(new Route("login",                 new LoginController()));
   control_tower.add_route(new Route("signup",                new SignupController()));
   control_tower.add_route(new Route("main_form",             new MainFormController()));

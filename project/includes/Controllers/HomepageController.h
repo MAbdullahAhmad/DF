@@ -46,8 +46,7 @@ class HomepageController : public MasterController{
         command = get_command();
         /**/ if (is_command("L", command))  return "login";
         else if (is_command("S", command))  return "signup";
-        else if (is_command("A", command))  return "about_us";
-        else if (is_command("C", command))  return "contact_us";
+        else if (is_command("A", command))  return "about";
         else if (is_command("E", command))  return "exit";
         else                                new PopupService ("Invalid Input", "You Entered Wrong Input. Please Try Again Later.");
       }

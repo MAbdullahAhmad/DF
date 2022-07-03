@@ -1,9 +1,11 @@
-#ifndef MODEL_Comment_H
-#define MODEL_Comment_H
+#ifndef MODEL_POST_COMMENT_H
+#define MODEL_POST_COMMENT_H
 
 #include "iostream"
+#include "../../libs/string_lib.h"
 #include "../CRUD.h"
 #include "../MasterModel.h"
+#include "User.h"
 
 using namespace std;
 
@@ -11,20 +13,20 @@ using namespace std;
 class PostComment : public TokenModel{
   private:
     // CRUD Obj
-    CRUD<Comment>* _crud;
+    CRUD<PostComment>* _crud;
 
     // Entity Props
     int post_id;
     int user_id;
-    char* comment[300];
+    char comment[300];
 
   public:
     //> Constructors
-    Comment():
+    PostComment():
       TokenModel(),
-      _crud(new CRUD<Comment>(this, "Comments")){}
+      _crud(new CRUD<PostComment>(this, "Comments")){}
        
-    Comment(
+    PostComment(
       int i,
       char* ti,
       int post_id,
@@ -34,9 +36,14 @@ class PostComment : public TokenModel{
     ):
       TokenModel(i, ti, ct, ut),
       post_id(post_id),
-      user_id(user_id)
+      user_id(user_id),
+      _crud(new CRUD<PostComment>(this, "Comments"))
     {
-        deep_copy(this->comment, com, 300);
+        deep_copy(this->comment, comment, 300);
+    }
+
+    bool create(){
+      return _crud->create();
     }
 
     //> Setters
@@ -46,8 +53,8 @@ class PostComment : public TokenModel{
     void set_user_id(int user_id){
       this->user_id = user_id;
     }
-    void set_comment(char* comment){
-      deep_copy(this->comment, com, 300);
+    void set_comment(const char* comment){
+      deep_copy(this->comment, comment, 300);
     }
     
     //> Getters
@@ -61,8 +68,28 @@ class PostComment : public TokenModel{
       return this->comment;
     }
    
-    CRUD<Comment>* crud(){
+    CRUD<PostComment>* crud(){
       return this->_crud;
+    }
+
+    //> Relations
+    User* user(){
+      User* u = new User();
+      u->set_id(this->user_id);
+      u = u->crud()->read();
+      return u;
+    }
+
+    //> Extras
+
+    // Row Display Channel
+    void display(MasterPage* page){
+      page->in("");
+      page->in(this->comment);
+      page->in("__RIGHT__");
+      page->in("( By " + str(this->user()->get_name()) + " )");
+      page->in("__END_RIGHT__");
+      page->in("__END__");
     }
 };
 

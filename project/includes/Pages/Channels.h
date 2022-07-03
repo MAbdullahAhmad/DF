@@ -44,7 +44,7 @@ class Channels : public MasterPage{
       // Centered Content
       this->in("__CENTER__");
 
-      this->in("Main Form");
+      this->in("Channel Posts");
       this->in("-------------"); this->in("");
       
       this->in(channel_name + " : Posts"); this->in("");
@@ -88,7 +88,7 @@ class Channels : public MasterPage{
       this->in("");
       this->in("Select a Post");
       this->in("__RIGHT__");
-      this->in("[S] Select a Channel");
+      this->in("[S] Select a Post");
       this->in("__END_RIGHT__");
       this->in("__END__");
     }

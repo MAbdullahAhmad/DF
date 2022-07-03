@@ -23,6 +23,7 @@ using namespace std;
 #include "Controllers/AdminUsersController.h"
 #include "Controllers/AdminCreateUserController.h"
 #include "Controllers/AdminChannelsController.h"
+#include "Controllers/AdminCreateChannelController.h"
 #include "Controllers/AdminAdminsController.h"
 
 // Logout Controller
@@ -144,7 +145,7 @@ ControlTower control_tower;
 void init_routes(){
   // string start = "welcome";
   // string start = "homepage";
-  string start = "admin_users";
+  string start = "admin_channels";
   control_tower.query(start);
 
   control_tower.add_route(new Route("welcome",               new WelcomeController()));
@@ -159,6 +160,7 @@ void init_routes(){
   control_tower.add_route(new Route("admin_users",           new AdminUsersController()));
   control_tower.add_route(new Route("admin_create_user",     new AdminCreateUserController()));
   control_tower.add_route(new Route("admin_channels",        new AdminChannelsController()));
+  control_tower.add_route(new Route("admin_create_channel",  new AdminCreateChannelController()));
   control_tower.add_route(new Route("admin_admins",          new AdminAdminsController()));
   control_tower.add_route(new Route("logout",                new LogoutController()));
 

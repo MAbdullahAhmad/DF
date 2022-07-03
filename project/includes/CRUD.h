@@ -29,6 +29,7 @@ class Reader{
     Reader(
       string file_name
     ){
+      cout << "Aya?\n";
       this->file_name = file_name;
     }
 
@@ -56,6 +57,13 @@ class Reader{
     }
 
     // Start, Read, Next, Get, Stop, Size
+    bool is_file(){
+      ifstream file(
+        this->file_name,
+        ios::binary | ios::in
+      );
+      return (bool)file;
+    }
     void start(){
       this->count = 0;
       this->record = new Entity;
@@ -101,8 +109,10 @@ class Reader{
 
     // Get All
     vector<Entity> all(){
+      cout << "Aithey Panga?\n";
       // Vector
       vector<Entity> records;
+      if(!is_file()) return records;
 
       // Start, Read, Push, End
       this->start();
@@ -436,8 +446,9 @@ class CRUD{
     // Get Max ID
     int get_max_id(){// Open
       int id = 0;
-      for(Entity e : this->all())
+      for(Entity e : this->all()){
         id = e.get_id();
+      }
       
       return id;
     }
@@ -445,13 +456,16 @@ class CRUD{
     // Create
     bool create(){
       // Open
+      cout << "Here\n"; // @debug
       ofstream file(
         crud_loc_prefix + this->table + crud_loc_postfix,
         ios::binary | ios::out | ios::app
       );
 
+      cout << "There\n"; // @debug
       // Confirm File Opened
       if(!(bool)file) return false;
+      cout << "Where\n"; // @debug
 
       try{
         // Write
@@ -483,9 +497,14 @@ class CRUD{
 
     // Read All
     vector<Entity> all(){
+      cout << "Kida fer?\n";
+      cout << "Bad di gal\n";
+      cout << this->table << '\n';
       Reader<Entity> records(
         crud_loc_prefix + this->table + crud_loc_postfix
       );
+      cout << "Idan fer?\n";
+
       return records.all();
     }
 

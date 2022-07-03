@@ -15,8 +15,6 @@ class Channel : public TokenModel{
 
     // Entity Props
     int server_id;
-    // char key[50];
-    // char value[50];
     char title[256];
     int type;
 
@@ -37,7 +35,26 @@ class Channel : public TokenModel{
       server_id(si),
       type(type)
     {
-        deep_copy(this->title, title, 256);
+      this->_crud = new CRUD<Channel>(this, "Channels");
+      deep_copy(this->title, title, 256);
+    }
+
+    Channel(
+      int si, // server_id
+      const char* title,
+      int type
+    ):
+      server_id(si),
+      type(type)
+    {
+      cout << "Kidan?\n";
+      this->_crud = new CRUD<Channel>(this, "Channels");
+      // Generate ID and TS
+      this->generate_id();
+      this->generate_ts();
+      cout << "Aidan?\n";
+      
+      deep_copy(this->title, title, 256);
     }
 
     //> Setters
@@ -46,6 +63,17 @@ class Channel : public TokenModel{
     }
     void set_type(int type){
       this->type = type;
+    }
+
+    void generate_id(){
+      cout << "Pelan\n";
+      this->id = 0;
+      try{
+        this->id = this->crud()->get_max_id() + 1;
+      } catch(exception const& e) {
+        this->id = 1;
+      }
+      cout << "Bachon\n";
     }
 
     // Getters
@@ -59,6 +87,26 @@ class Channel : public TokenModel{
    
     CRUD<Channel>* crud(){
       return this->_crud;
+    }
+    
+    bool create(){
+      cout << "Smare\n"; // @debug
+      return _crud->create();
+    }
+
+    // Extras
+
+    // Display Channel
+    void display(MasterPage* page){
+      page->in("");
+      page->in("User-" + str(this->id) + ":");
+      page->in("");
+      page->in("     ID : " + str(this->id));
+      page->in("     Token-ID : " + str(this->token_id));
+      page->in("     Server-Id : " + str(this->server_id));
+      page->in("     Title : " + str(this->title));
+      page->in("");
+      page->in("__END__");
     }
 };
 

@@ -7,7 +7,8 @@ using namespace SessionSpace;
 // Session Object
 int main(){
   // Seed Admins
-  admins();
+  // admins();
+  servers();
 
   // Return
   return 0;

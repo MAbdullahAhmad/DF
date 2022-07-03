@@ -64,7 +64,6 @@ class AdminUsers : public MasterPage{
       this->in("Users are as follow:");
       this->in("__END__");
       for(User u : users){
-        cout << u.get_id() << '\n';
         if(u.get_role()=='a') continue;
         u.display(this);
       }

@@ -93,6 +93,7 @@ class AdminUsersController : public MasterController{
         is_command(cmd, "C")
       ) return "admin_users";
       
+      // Deletion Operation
       User* u = crud->read(stoi(cmd));
       if(u){
         if(crud->del(stoi(cmd))){

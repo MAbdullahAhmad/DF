@@ -4,6 +4,7 @@
 #include "iostream"
 #include "../CRUD.h"
 #include "../MasterModel.h"
+#include "Server.h"
 
 using namespace std;
 
@@ -87,6 +88,14 @@ class Channel : public TokenModel{
     
     bool create(){
       return _crud->create();
+    }
+
+    // Relations
+    Server server(){
+      Server s;
+      s.set_id(this->server_id);
+      s.crud()->read();
+      return s;
     }
 
     // Extras

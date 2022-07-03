@@ -16,13 +16,6 @@ server_tag (base|imported|linked)
 created_ts
 updated_ts
 
-- server_config
-id
-token_id
-server_id
-key
-value
-
 - channel
 id
 token_id
@@ -48,21 +41,5 @@ token_id
 post_id
 user_id
 comment
-created_ts
-updated_ts
-
-- reactions : seeded
-id
-label
-ascii
-created_ts
-updated_ts
-
-- post_reactions
-id
-token_id
-post_id
-user_id
-reaction_id
 created_ts
 updated_ts

@@ -90,7 +90,7 @@ class AdminChannels : public MasterPage{
     void display_channels(vector<Channel> channels){
       this->in("__START__");
       this->in("");
-      this->in("ALL USERS");
+      this->in("ALL Channels");
       this->in("---------");
       this->in("Channels are as follow:");
       this->in("__END__");

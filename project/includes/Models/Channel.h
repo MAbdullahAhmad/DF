@@ -22,7 +22,7 @@ class Channel : public TokenModel{
     //> Constructors
     Channel():
       TokenModel(),
-      _crud(new CRUD<Channel>(this, "Channels")){}
+      _crud(new CRUD<Channel>(this, "channels")){}
 
     Channel(
       int i,
@@ -35,7 +35,7 @@ class Channel : public TokenModel{
       server_id(si),
       type(type)
     {
-      this->_crud = new CRUD<Channel>(this, "Channels");
+      this->_crud = new CRUD<Channel>(this, "channels");
       deep_copy(this->title, title, 256);
     }
 
@@ -47,7 +47,7 @@ class Channel : public TokenModel{
       server_id(si),
       type(type)
     {
-      this->_crud = new CRUD<Channel>(this, "Channels");
+      this->_crud = new CRUD<Channel>(this, "channels");
       // Generate ID and TS
       this->generate_id();
       this->generate_ts();
@@ -94,12 +94,13 @@ class Channel : public TokenModel{
     // Display Channel
     void display(MasterPage* page){
       page->in("");
-      page->in("User-" + str(this->id) + ":");
+      page->in("Channel-" + str(this->id) + ":");
       page->in("");
       page->in("     ID : " + str(this->id));
       page->in("     Token-ID : " + str(this->token_id));
       page->in("     Server-Id : " + str(this->server_id));
       page->in("     Title : " + str(this->title));
+      page->in("     Timestamps : [Created: " + str(this->created_ts) + "] [Updated: " + str(this->updated_ts) + "]");
       page->in("");
       page->in("__END__");
     }

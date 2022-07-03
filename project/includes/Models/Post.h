@@ -75,6 +75,9 @@ class Post : public TokenModel{
     void set_content(char *content){
       deep_copy(this->content, content, 20000);
     }
+    void set_title(char *title){
+      deep_copy(this->title, title, 20000);
+    }
 
     // ID Generator
     void generate_id(){
@@ -91,6 +94,9 @@ class Post : public TokenModel{
     }
     char* get_content(){
       return this->content;
+    }
+    char* get_title(){
+      return this->title;
     }
    
     CRUD<Post>* crud(){

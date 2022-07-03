@@ -52,7 +52,6 @@ class ChannelsController : public MasterController{
       this->channels->footer();
       this->output_manager->execute(this->channels);
 
-
       // Move Next
       MoveNext:
 

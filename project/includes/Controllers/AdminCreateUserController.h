@@ -17,7 +17,7 @@ class AdminCreateUserController : public MasterController{
 
   public:
     AdminCreateUserController(){
-      output_manager  = nullptr;
+      output_manager             = nullptr;
       admin_create_user          = nullptr;
     }
 

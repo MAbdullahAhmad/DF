@@ -21,7 +21,7 @@ class ViewPostController : public MasterController{
   public:
     ViewPostController(){
       output_manager  = nullptr;
-      view_post          = nullptr;
+      view_post       = nullptr;
     }
 
     string fire(){

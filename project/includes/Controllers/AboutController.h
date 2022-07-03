@@ -19,7 +19,7 @@ class AboutController : public MasterController{
   public:
     AboutController(){
       output_manager  = nullptr;
-      about = nullptr;
+      about           = nullptr;
     }
 
     string fire(){

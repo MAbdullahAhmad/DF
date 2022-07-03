@@ -19,7 +19,7 @@ class NewPostController : public MasterController{
   public:
     NewPostController(){
       output_manager  = nullptr;
-      new_post          = nullptr;
+      new_post        = nullptr;
     }
 
     string fire(){

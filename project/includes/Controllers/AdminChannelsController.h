@@ -19,9 +19,9 @@ class AdminChannelsController : public MasterController{
 
   public:
     AdminChannelsController(){
-      output_manager  = nullptr;
+      output_manager     = nullptr;
       admin_channels     = nullptr;
-      crud            = nullptr;
+      crud               = nullptr;
     }
 
     string fire(){

@@ -8,10 +8,8 @@ int main(){
   using namespace std::chrono;
 
   sleep_for(nanoseconds(1000000000));
-  cout << "CHDKI\n";
   
   sleep_for(nanoseconds(1000000000));
-  cout << "FUKI\n";
   
   return 0;
 }

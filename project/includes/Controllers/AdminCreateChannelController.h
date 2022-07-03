@@ -81,15 +81,12 @@ class AdminCreateChannelController : public MasterController{
       // delay_seconds(1);
 
       // AdminCreateChannel Operation
-      cout << "Pinda\n";
       Channel * channel;
-      cout << "Minda\n";
       channel = new Channel(
         server_id,
         title.c_str(),
         2
       );
-      cout << "Jinda\n";
       if(channel->create()){
         // Authenticating Message
         this->output_manager->start();

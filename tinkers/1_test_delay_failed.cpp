@@ -6,6 +6,5 @@ int main(){
   system("echo abc; sleep 0.5; echo def; sleep 0.5");
   // cout << "CD ";
   // system("sleep 0.5");
-  // cout << "EFGH\n";
   return 0;
 }

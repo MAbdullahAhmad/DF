@@ -47,12 +47,10 @@ class Channel : public TokenModel{
       server_id(si),
       type(type)
     {
-      cout << "Kidan?\n";
       this->_crud = new CRUD<Channel>(this, "Channels");
       // Generate ID and TS
       this->generate_id();
       this->generate_ts();
-      cout << "Aidan?\n";
       
       deep_copy(this->title, title, 256);
     }
@@ -66,14 +64,12 @@ class Channel : public TokenModel{
     }
 
     void generate_id(){
-      cout << "Pelan\n";
       this->id = 0;
       try{
         this->id = this->crud()->get_max_id() + 1;
       } catch(exception const& e) {
         this->id = 1;
       }
-      cout << "Bachon\n";
     }
 
     // Getters
@@ -90,7 +86,6 @@ class Channel : public TokenModel{
     }
     
     bool create(){
-      cout << "Smare\n"; // @debug
       return _crud->create();
     }
 

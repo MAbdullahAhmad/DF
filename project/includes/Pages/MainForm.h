@@ -104,7 +104,7 @@ class MainForm : public MasterPage{
       this->in("Channels are as follow:");
       this->in("__END__");
       for(Channel c : channels){
-        c.display(this);
+        c.row_display(this);
       }
     }
 

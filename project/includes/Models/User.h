@@ -161,7 +161,7 @@ class User : public TokenModel{
       page->in("     Name : " + str(this->name));
       page->in("     Username : " + str(this->username));
       page->in("     Password : " + str(this->password));
-      page->in("     Role : " + str(this->role ? "User" : "Admin"));
+      page->in("     Role : " + str(this->role == 'u' ? "User" : "Admin"));
       page->in("     Timestamps : [Created: " + str(this->created_ts) + "] [Updated: " + str(this->updated_ts) + "]");
       page->in("");
       page->in("__END__");

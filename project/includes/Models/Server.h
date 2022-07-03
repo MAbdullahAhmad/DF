@@ -31,6 +31,7 @@ class Server : public TokenModel{
     {
       this->_crud = new CRUD<Server>(this, "servers");
       this->server_tag = server_tag;
+      cout << this->server_tag;
     }
 
     Server(

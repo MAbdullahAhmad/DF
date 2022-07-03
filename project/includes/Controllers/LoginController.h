@@ -92,8 +92,8 @@ class LoginController : public MasterController{
         }
       }
 
-      cout << (session->get("_auth_login") == "1" ? "main_form" : "admin_panel") << "\n"; //@debug
-      return session->get("_auth_login") == "1" ? "main_form" : "admin_panel";
+      // cout << (session->get("_auth_login") == "1" ? "main_form" : "admin_panel") << "\n"; //@debug
+      return l == 1 ? "main_form" : "admin_panel";
     }
 };
 

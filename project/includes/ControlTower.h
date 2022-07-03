@@ -143,8 +143,8 @@ ControlTower control_tower;
 
 void init_routes(){
   // string start = "welcome";
-  // string start = "homepage";
   string start = "homepage";
+  // string start = "main_form";
   control_tower.query(start);
 
   control_tower.add_route(new Route("welcome",               new WelcomeController()));

@@ -8,6 +8,13 @@
 
 using namespace std;
 
+string tags[4] = {
+  "Unspecified",
+  "Base",
+  "Imported",
+  "Linked"
+};
+
 //> Channel Class
 class Channel : public TokenModel{
   private:
@@ -91,10 +98,10 @@ class Channel : public TokenModel{
     }
 
     // Relations
-    Server server(){
-      Server s;
-      s.set_id(this->server_id);
-      s.crud()->read();
+    Server* server(){
+      Server* s = new Server();
+      s->set_id(this->server_id);
+      s = s->crud()->read();
       return s;
     }
 
@@ -111,6 +118,13 @@ class Channel : public TokenModel{
       page->in("     Title : " + str(this->title));
       page->in("     Timestamps : [Created: " + str(this->created_ts) + "] [Updated: " + str(this->updated_ts) + "]");
       page->in("");
+      page->in("__END__");
+    }
+
+    // Row Display Channel
+    void row_display(MasterPage* page){
+      page->in("");
+      page->in("  [ID : " + str(this->id) + ", Server: " + str(this->server_id) + " (" + tags[this->server()->get_server_tag()] + "), Title: " + this->title + "]");
       page->in("__END__");
     }
 };

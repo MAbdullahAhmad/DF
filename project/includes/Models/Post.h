@@ -14,6 +14,7 @@ class Post : public TokenModel{
     CRUD<Post>* _crud;
 
     // Entity Props
+    int channel_id;
     int author_id;
     char title[256];
     char content[20000];
@@ -28,7 +29,7 @@ class Post : public TokenModel{
     Post(
       int i,
       char* ti,
-      int server_id,
+      int channel_id,
       int author_id,
       char* title,
       char* content,
@@ -36,7 +37,7 @@ class Post : public TokenModel{
       time_t ct, time_t ut
     ):
       TokenModel(i, ti, ct, ut),
-      server_id(si),
+      channel_id(channel_id),
       author_id(author_id),
       type(type)
     {
@@ -46,11 +47,11 @@ class Post : public TokenModel{
 
     //> Setters
 
-    void set_server_id(int server_id){
-      this->server_id = server_id;
+    void set_channel_id(int channel_id){
+      this->channel_id = channel_id;
     }
     void set_author_id(int author_id){
-      deep_copy(this->author_id, author_id);
+      this->author_id = author_id;
     }
     void set_content(char *content){
       deep_copy(this->content, content, 20000);
@@ -61,8 +62,8 @@ class Post : public TokenModel{
 
     //> Getters
 
-    int get_server_id(){
-      return this->server_id;
+    int get_channel_id(){
+      return this->channel_id;
     }
     int get_author_id(){
       return this->author_id;
@@ -76,6 +77,37 @@ class Post : public TokenModel{
    
     CRUD<Post>* crud(){
       return this->_crud;
+    }
+
+    // Relations
+    Channel* channel(){
+      Channel* c = new Channel();
+      c->set_id(this->channel_id);
+      c = c->crud()->read();
+      return c;
+    }
+
+    // Extras
+
+    // Display Channel
+    void display(MasterPage* page){
+      page->in("");
+      page->in("Channel-" + str(this->id) + ":");
+      page->in("");
+      page->in("     ID : " + str(this->id));
+      page->in("     Token-ID : " + str(this->token_id));
+      page->in("     Server-Id : " + str(this->channel_id));
+      page->in("     Title : " + str(this->title));
+      page->in("     Timestamps : [Created: " + str(this->created_ts) + "] [Updated: " + str(this->updated_ts) + "]");
+      page->in("");
+      page->in("__END__");
+    }
+
+    // Row Display Channel
+    void row_display(MasterPage* page){
+      page->in("");
+      page->in("  [ID : " + str(this->id) + ", Channel: " + str(this->channel_id) + " (" + this->channel()->get_title() + "), Post Title: " + this->title + "]");
+      page->in("__END__");
     }
 };
 

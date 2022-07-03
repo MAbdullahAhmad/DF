@@ -35,6 +35,7 @@ updated_ts
 - post
 id
 token_id
+channel_id (user)
 author_id (user)
 title
 content (text)

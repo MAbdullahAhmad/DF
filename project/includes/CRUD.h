@@ -492,7 +492,6 @@ class CRUD{
 
     // Read All
     vector<Entity> all(){
-      cout << this->table << '\n';
       Reader<Entity> records(
         crud_loc_prefix + this->table + crud_loc_postfix
       );

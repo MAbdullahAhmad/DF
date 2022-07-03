@@ -3,6 +3,7 @@
 
 #include "iostream"
 #include "../../libs/string_lib.h"
+#include "../CRUD.h"
 #include "../MasterController.h"
 #include "../OutputManager.h"
 #include "../Pages/MainForm.h"
